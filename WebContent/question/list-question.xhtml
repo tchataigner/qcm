@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<f:metadata>
+  <f:event type="preRenderView" listener="#{questionController.loadQuestions()}"/>
+</f:metadata>
+
+<h:head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<title>Questions</title>
+	
+	<h:outputStylesheet library="css" name="style.css"  />
+	
+</h:head>
+
+<h:body>
+
+	<div id="wrapper">
+		<div id="header">
+			<h2>Questions</h2>
+		</div>
+	</div>
+
+	<div id="container">
+
+		<div id="content">
+		
+			<h:messages globalOnly="true" />
+		
+			<h:button value="Ajouter" styleClass="add-matiere-button" outcome="add-question-form" />
+		
+			<h:form>
+						
+			<h:dataTable value="#{questionController.questions}" var="tempQuestion"
+				styleClass="demo-table" 
+				headerClass="demo-table-header"
+				rowClasses="demo-table-odd-row,demo-table-even-row">
+
+				<h:column>
+					<!-- the column header -->
+					<f:facet name="header">Text</f:facet>
+
+					<!--  the value for each row -->
+					#{tempQuestion.text}
+				</h:column>
+
+				<h:column>
+					<!-- the column header -->
+					<f:facet name="header">Media</f:facet>
+
+					<!--  the value for each row -->
+					#{tempQuestion.media}
+				</h:column>
+				
+				<h:column>
+					<!-- the column header -->
+					<f:facet name="header">Difficulty</f:facet>
+
+					<!--  the value for each row -->
+					#{tempQuestion.difficulty}
+				</h:column>
+			</h:dataTable>
+
+			</h:form>
+
+		</div>
+		
+	</div>
+
+</h:body>
+</html>

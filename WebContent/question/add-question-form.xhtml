@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<title>Add Question</title>
+	
+	<h:outputStylesheet library="css" name="style.css"  />
+	<h:outputStylesheet library="css" name="add-matiere-style.css"  />
+	
+</h:head>
+
+<h:body>
+
+	<div id="wrapper">
+		<div id="header">
+			<h2>Question</h2>
+		</div>
+	</div>
+	
+	<div id="container">
+		<h3>Ajouter une Question</h3>
+
+		<h:messages globalOnly="true" />
+
+		<h:form id="form" style="margin-top: 10px;" >
+			<h:panelGrid columns="3">
+
+				<h:outputLabel>Text*:</h:outputLabel> <h:inputText value="#{question.text}" id="text" 
+									required="true"
+            							requiredMessage="L'énnoncé de la question est obligatoire."/> 	<h:message for="text" />
+				
+				<h:outputLabel /> 
+				
+			
+				<h:commandButton value="Valider" styleClass="save" action="#{questionController.addQuestion(question)}"/>
+			
+			</h:panelGrid>
+		</h:form>
+
+		<div style="clear: both;"></div>
+
+		<p><h:outputLink value="list-matiere.xhtml">Back to List</h:outputLink></p>
+
+	</div>	
+</h:body>
+</html>
