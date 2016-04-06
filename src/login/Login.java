@@ -19,6 +19,7 @@ public class Login implements Serializable {
     private String pwd;
     private String msg;
     private String user;
+    private int power;
  
     public String getPwd() {
         return pwd;
@@ -43,14 +44,25 @@ public class Login implements Serializable {
     public void setUser(String user) {
         this.user = user;
     }
- 
-    //validate login
+    
+    public void setPower(int power) {
+		this.power = power;
+	}
+
+	public int getPower() {
+		return power;
+	}
+
+	//validate login
     public String validateUsernamePassword() {
         boolean valid = LoginDAO.validate(user, pwd);
+        
         if (valid) {
+        	int pow = LoginDAO.getDataPower(user, pwd);
             HttpSession session = SessionBean.getSession();
             session.setAttribute("username", user);
-            return "admin";
+            session.setAttribute("power", pow);
+            return "ok";
         } else {
             FacesContext.getCurrentInstance().addMessage(
                     null,

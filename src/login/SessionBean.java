@@ -29,4 +29,12 @@ public class SessionBean {
         else
             return null;
     }
+    
+    public static String getUserPower() {
+        HttpSession session = getSession();
+        if (session != null)
+            return (String) session.getAttribute("power");
+        else
+            return null;
+    }
 }

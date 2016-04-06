@@ -8,8 +8,9 @@
         <navigation-rule>
         <from-view-id>/login.xhtml</from-view-id>
         <navigation-case>
-            <from-outcome>admin</from-outcome>
-            <to-view-id>/admin.xhtml</to-view-id>
+            <from-outcome>ok</from-outcome>
+            <to-view-id>/matiere/list-matiere.xhtml</to-view-id>
+            <redirect/>
         </navigation-case>
     </navigation-rule>
     

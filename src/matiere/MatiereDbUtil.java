@@ -51,7 +51,7 @@ public class MatiereDbUtil {
 		try {
 			myConn = getConnection();
 
-			String sql = "select * from Matiere order by name";
+			String sql = "select * from matiere order by name";
 
 			myStmt = myConn.createStatement();
 
@@ -94,6 +94,29 @@ public class MatiereDbUtil {
 			myStmt.setString(1, theMatiere.getName());
 			
 			myStmt.execute();			
+		}
+		finally {
+			close (myConn, myStmt);
+		}
+		
+	}
+	
+	public void deleteMatiere(int matiereId) throws Exception {
+
+		Connection myConn = null;
+		PreparedStatement myStmt = null;
+
+		try {
+			myConn = getConnection();
+
+			String sql = "delete from matiere where id = ? ";
+
+			myStmt = myConn.prepareStatement(sql);
+
+			// set params
+			myStmt.setInt(1, matiereId);
+			
+			myStmt.execute();
 		}
 		finally {
 			close (myConn, myStmt);
