@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+
+<ui:composition>
+	<h:form>
+		<h:commandLink id="submitButton" value="#{mat_id} - US"
+			action="#{matiere.outcome}">
+			<f:param name="id" value="#{mat_id}" />
+		</h:commandLink>
+	</h:form>
+</ui:composition>
+</html>

@@ -63,4 +63,32 @@ public class LoginDAO {
 		}
 		return 0;
 	}
+	
+	public static int getDataId(String user, String password) {
+		Connection con = null;
+		PreparedStatement ps = null;
+
+		try {
+			con = DataConnect.getConnection();
+			ps = con.prepareStatement("Select id from user where login = ? and password = ?");
+			ps.setString(1, user);
+			ps.setString(2, password);
+
+			ResultSet rs = ps.executeQuery();
+			boolean encore = rs.next();
+			
+			while (encore) {
+				String text = rs.getString(1);
+				int power = Integer.parseInt(text);
+				return power;
+			}
+
+		} catch (SQLException ex) {
+			System.out.println("Login error -->" + ex.getMessage());
+			return 0;
+		} finally {
+			DataConnect.close(con);
+		}
+		return 0;
+	}
 }

@@ -16,12 +16,23 @@ public class Login implements Serializable {
  
     private static final long serialVersionUID = 1094801825228386363L;
      
+    private int id;
     private String pwd;
     private String msg;
     private String user;
     private int power;
+    
+    
  
-    public String getPwd() {
+    public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getPwd() {
         return pwd;
     }
  
@@ -59,9 +70,11 @@ public class Login implements Serializable {
         
         if (valid) {
         	int pow = LoginDAO.getDataPower(user, pwd);
+        	int id = LoginDAO.getDataId(user, pwd);
             HttpSession session = SessionBean.getSession();
             session.setAttribute("username", user);
             session.setAttribute("power", pow);
+            session.setAttribute("userid", id);
             return "ok";
         } else {
             FacesContext.getCurrentInstance().addMessage(

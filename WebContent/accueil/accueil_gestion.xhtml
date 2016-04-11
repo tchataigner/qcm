@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+
+<ui:composition>
+<h:form>
+		<h:commandButton value="Gérer la matière"
+			action="#{matiereController.deleteMatiere()}">
+			<f:param name="id" value="" />
+		</h:commandButton>
+		<h:commandButton value="Créer une évaluation"
+			action="#{matiereController.deleteMatiere()}">
+			<f:param name="id" value="" />
+		</h:commandButton>
+		<h:commandButton value="Créer un test de connaissance"
+			action="#{matiereController.deleteMatiere()}">
+			<f:param name="id" value="" />
+		</h:commandButton>
+		<h:panelGroup rendered="#{sessionScope.power == 2 }">
+			<h:commandButton value="Supprimer la matière"
+				action="#{matiereController.deleteMatiere()}">
+				<f:param name="id" value="#{mat_id}" />
+			</h:commandButton>
+		</h:panelGroup>
+	</h:form>
+</ui:composition>
+</html>

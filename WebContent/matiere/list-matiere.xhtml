@@ -2,72 +2,37 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:c="http://java.sun.com/jsp/jstl/core">
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 
+
+
+<ui:composition>
 <f:metadata>
 	<f:event type="preRenderView"
 		listener="#{matiereController.loadMatieres()}" />
 </f:metadata>
 
-<h:head>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
-	<title>Matieres</title>
-
-	<h:outputStylesheet library="css" name="style.css" />
-
-</h:head>
-
-<h:body>
-
-	<div id="wrapper">
-		<div id="header">
-			<h2>Matieres #{sessionScope.power}</h2>
-		</div>
-	</div>
-
 	<div id="container">
-
-		<div id="content">
-			<h:messages globalOnly="true" />
-			<h:panelGroup rendered="#{sessionScope.power >= 1}">
+				<h:panelGroup rendered="#{sessionScope.power >= 1}">
 
 				<h:button value="Ajouter" styleClass="add-matiere-button"
-					outcome="add-matiere-form" />
+					outcome="/matiere/add-matiere-form" />
 			</h:panelGroup>
-
 			<h:form>
 
-				<h:dataTable value="#{matiereController.matieres}" var="tempMatiere"
-					styleClass="demo-table" headerClass="demo-table-header"
-					rowClasses="demo-table-odd-row,demo-table-even-row">
+	
+				<ui:repeat value="#{matiereController.matieres}" var="item">
 
-					<h:column>
-						<!-- the column header -->
-						<f:facet name="header">Name</f:facet>
-
-						<!--  the value for each row -->
-					#{tempMatiere.name}
-				</h:column>
-					<h:column>
-						<f:facet name="header">Autoévaluation</f:facet>
-						<h:commandLink value="Lancer"
-							action="#{matiereController.storeMatiereId(tempMatiere.id)}" />
-						<h:panelGroup rendered="#{sessionScope.power == 2}">
-
-							<h:commandLink value="Supprimer"
-								action="#{matiereController.deleteMatiere(tempMatiere.id)}" />
-
-						</h:panelGroup>
-					</h:column>
-
-				</h:dataTable>
+					<h:commandLink>
+           #{item.name}
+    <f:setPropertyActionListener target="#{mat_id}" value="#{item.id}" />
+					</h:commandLink>
+				</ui:repeat>
 
 			</h:form>
 		</div>
 
-	</div>
 
-</h:body>
+</ui:composition>
 </html>

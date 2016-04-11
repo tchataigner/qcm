@@ -1,41 +1,55 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-<head>
-  <title><ui:insert name="title">Default title</ui:insert></title>
-</head>
-
-<body>
-<ui:debug hotkey="x" rendered="#{initParam['javax.faces.FACELETS_DEVELOPMENT']}"/>
-
-<div id="header">
-    <ui:insert name="header">
-    	Header area.  See comments below this line in the source.
-    	<!--  include your header file or uncomment the include below and create header.xhtml in this directory -->
-    	<!-- <ui:include src="header.xhtml"/> -->
-    </ui:insert>
-</div>
-
-
-<div id="content">
-  <ui:insert name="content">
-    	Content area.  See comments below this line in the source.
-    	<!--  include your content file or uncomment the include below and create content.xhtml in this directory -->
-	  	<!-- <div> -->
-    	<!-- <ui:include src="content.xhtml"/> -->  
-    	<!-- </div> -->
-  </ui:insert>
-</div>
-
-<div id="footer">
-  <ui:insert name="footer">
-    	Footer area.  See comments below this line in the source.
-    	<!--  include your header file or uncomment the include below and create footer.xhtml in this directory -->
-		<!--<ui:include src="footer.xhtml"/>  -->
-  </ui:insert>
-</div>
-
-</body>
-
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+ 
+    <h:head>
+        <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+ 
+            <title>primestrap</title>
+        </f:facet>
+ 
+        <f:facet name="middle">
+            <h:outputStylesheet name="bootstrap/css/bootstrap.css" />
+            
+            <h:outputStylesheet name="css/dashboard.css" />
+            
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" />
+            
+            <h:outputScript name="bootstrap/js/bootstrap.js" />
+        </f:facet>
+        
+        <f:facet name="last">
+ 
+        </f:facet>
+ 
+    </h:head>
+              
+    <h:body>
+   	
+         <ui:include src="header.xhtml" />
+         <ui:include src="/matiere/list-matiere.xhtml" />  
+         
+         <!-- Partie élève -->
+         
+         <h:panelGroup rendered="#{sessionScope.power == 0}">
+         <ui:include src="/accueil/accueil_test.xhtml" />  
+         <ui:include src="/accueil/accueil_list_section.xhtml" />
+         </h:panelGroup>
+         
+         <!-- Partie prof -->
+         
+         <h:panelGroup rendered="#{sessionScope.power >= 1 }">
+         <ui:include src="/accueil/accueil_gestion.xhtml" />  
+         </h:panelGroup>
+         
+ 
+         
+    </h:body>
 </html>
+ 

@@ -78,7 +78,7 @@ public class MatiereDbUtil {
 		}
 	}
 	
-	public void addMatiere(Matiere theMatiere) throws Exception {
+	public void addMatiere(Matiere theMatiere, int fk_user_id) throws Exception {
 
 		Connection myConn = null;
 		PreparedStatement myStmt = null;
@@ -86,12 +86,13 @@ public class MatiereDbUtil {
 		try {
 			myConn = getConnection();
 
-			String sql = "insert into matiere (name) values (?)";
+			String sql = "insert into matiere (name, fk_user_id) values (?,?)";
 
 			myStmt = myConn.prepareStatement(sql);
 
 			// set params
 			myStmt.setString(1, theMatiere.getName());
+			myStmt.setInt(2, fk_user_id);
 			
 			myStmt.execute();			
 		}

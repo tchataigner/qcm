@@ -54,7 +54,7 @@ public class MatiereController {
 	public String storeMatiereId(int matiereId) {
 
 		logger.info("loading matière: " + matiereId);
-
+		System.out.println(matiereId);
 		try {
 			// put in the request attribute ... so we can use it on the form
 			// page
@@ -77,22 +77,22 @@ public class MatiereController {
 	}
 
 
-	public String addMatiere(Matiere theMatiere) {
+	public String addMatiere(Matiere theMatiere, int fk_user_id) {
 		logger.info("Adding matiere: " + theMatiere);
 		try {
-			matiereDbUtil.addMatiere(theMatiere);
+			matiereDbUtil.addMatiere(theMatiere, fk_user_id);
 		} catch (Exception exc) {
 			logger.log(Level.SEVERE, "Error adding matiere", exc);
 			addErrorMessage(exc);
 			return null;
 		}
-		return "list-matiere?faces-redirect=true";
+		return "/index.xhtml";
 	}
 
-	public String deleteMatiere(int matiereId) {
-
-		logger.info("loading matière: " + matiereId);
-
+	public String deleteMatiere() {
+		FacesContext fc = FacesContext.getCurrentInstance();
+		Map<String,String> params = fc.getExternalContext().getRequestParameterMap();
+		int matiereId = Integer.parseInt(params.get("id"));
 		try {
 			
 			matiereDbUtil.deleteMatiere(matiereId);
