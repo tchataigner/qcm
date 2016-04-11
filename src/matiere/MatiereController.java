@@ -51,30 +51,7 @@ public class MatiereController {
 		}
 	}
 	
-	public String storeMatiereId(int matiereId) {
 
-		logger.info("loading matière: " + matiereId);
-		System.out.println(matiereId);
-		try {
-			// put in the request attribute ... so we can use it on the form
-			// page
-			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-
-			Map<String, Object> requestMap = externalContext.getRequestMap();
-			requestMap.put("matiere", matiereId);
-
-		} catch (Exception exc) {
-			// send this to server logs
-			logger.log(Level.SEVERE, "Error loading student id:" + matiereId, exc);
-
-			// add error message for JSF page
-			addErrorMessage(exc);
-
-			return null;
-		}
-
-		return "/test/auto-evaluation.xhtml";
-	}
 
 
 	public String addMatiere(Matiere theMatiere, int fk_user_id) {

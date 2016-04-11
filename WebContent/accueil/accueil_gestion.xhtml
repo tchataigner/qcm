@@ -8,18 +8,18 @@
 
 
 <ui:composition>
-<h:form>
+	<h:form>
 		<h:commandButton value="Gérer la matière"
-			action="#{matiereController.deleteMatiere()}">
-			<f:param name="id" value="" />
+			action="#{matiere.outcome('/gestion/gestion_accueil.xhtml')}">
+			<f:param name="id" value="#{mat_id}" />
 		</h:commandButton>
 		<h:commandButton value="Créer une évaluation"
 			action="#{matiereController.deleteMatiere()}">
-			<f:param name="id" value="" />
+			<f:param name="id" value="#{mat_id}" />
 		</h:commandButton>
 		<h:commandButton value="Créer un test de connaissance"
 			action="#{matiereController.deleteMatiere()}">
-			<f:param name="id" value="" />
+			<f:param name="id" value="#{mat_id}" />
 		</h:commandButton>
 		<h:panelGroup rendered="#{sessionScope.power == 2 }">
 			<h:commandButton value="Supprimer la matière"

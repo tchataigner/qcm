@@ -24,11 +24,11 @@ public class Matiere {
 		
 	}
 	
-	public String outcome(){
+	public String outcome(String destination){
 		FacesContext fc = FacesContext.getCurrentInstance();
 		this.id = Integer.parseInt(getIdParam(fc));
 		
-		return "/test/auto-evaluation.xhtml";
+		return destination;
 	}
 	
 	public Matiere(int id, String name) {
