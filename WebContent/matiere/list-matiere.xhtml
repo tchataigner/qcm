@@ -23,11 +23,15 @@
 
 	
 				<ui:repeat value="#{matiereController.matieres}" var="item">
-
-					<h:commandLink>
-           #{item.name}
-    <f:setPropertyActionListener target="#{mat_id}" value="#{item.id}" />
-					</h:commandLink>
+					<div class="row">
+						<div class="col-md-12 liste_mat" id="liste-link">
+							<h:commandLink styleClass="toggle">
+           					#{item.name}
+           					<f:ajax execute="@form" render=":test1:submitButton" />
+    						<f:setPropertyActionListener target="#{mat_id}" value="#{item.id}" />
+							</h:commandLink>
+						</div>
+					</div>
 				</ui:repeat>
 
 			</h:form>

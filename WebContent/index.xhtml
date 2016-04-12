@@ -17,11 +17,14 @@
         <f:facet name="middle">
             <h:outputStylesheet name="bootstrap/css/bootstrap.css" />
             
-            <h:outputStylesheet name="css/dashboard.css" />
+            <h:outputStylesheet name="css/style.css" />
             
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" />
-            
+			<h:outputScript target="body" name="js/jquery.js" /> 
+			           
             <h:outputScript name="bootstrap/js/bootstrap.js" />
+            
+            <h:outputScript target="body" name="js/action.js" />
+            
         </f:facet>
         
         <f:facet name="last">
@@ -33,22 +36,34 @@
     <h:body>
    	
          <ui:include src="header.xhtml" />
-         <ui:include src="/matiere/list-matiere.xhtml" />  
-         
-         <!-- Partie élève -->
-         
-         <h:panelGroup rendered="#{sessionScope.power == 0}">
-         <ui:include src="/accueil/accueil_test.xhtml" />  
-         <ui:include src="/accueil/accueil_list_section.xhtml" />
-         </h:panelGroup>
-         
-         <!-- Partie prof -->
-         
-         <h:panelGroup rendered="#{sessionScope.power >= 1 }">
-         <ui:include src="/accueil/accueil_gestion.xhtml" />  
-         </h:panelGroup>
-         
- 
+        <div class="container">
+         <div class="row mySelect">
+			<div class="col-md-4">
+				<h3 class="center-text">Liste des matières</h3>
+         		<ui:include src="/matiere/list-matiere.xhtml" />  
+         	</div>
+	         <!-- Partie élève -->
+	        
+	         <h:panelGroup rendered="#{sessionScope.power == 0}">
+	         <div class="col-md-4 panel">
+	         	<h3 class="center-text">Générer un QCM</h3>
+	         	<ui:include src="/accueil/accueil_test.xhtml" />
+	         </div>
+	         <div class="col-md-4 panel"> 
+	         	<h3 class="center-text">Liste des cours</h3> 
+	         	<ui:include src="/accueil/accueil_list_section.xhtml" />
+	         </div>
+	         </h:panelGroup>
+	         
+	         <!-- Partie prof -->
+	         
+	         <h:panelGroup rendered="#{sessionScope.power >= 1 }">
+	         <div class="col-md-4 panel"> 
+	         	<ui:include src="/accueil/accueil_gestion.xhtml" />  
+	         </div>
+	         </h:panelGroup>
+         </div>
+ 		</div>
          
     </h:body>
 </html>

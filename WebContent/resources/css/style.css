@@ -2,6 +2,8 @@ html,body{
 	margin-left:15px; margin-right:15px; 
 	padding:0px; 
 	font-family:Verdana, Arial, Helvetica, sans-serif;
+	padding-top: 50px;
+	background-color:#E3ECF4;
 }
 
 .demo-table {   
@@ -52,4 +54,95 @@ html,body{
 	
 	margin-bottom: 15px;
 	background: #cccccc;
+}
+
+/*start */
+
+.btn_style {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0px;
+  font-family: Arial;
+  color: #114785;
+  font-size: 20px;
+  background: white;
+  padding: 20px 30px 20px 30px;
+  border: solid #114785 2px;
+  text-decoration: none;
+  margin-top:20%;
+}
+
+.btn_style:hover {
+  background: #EEA43F;
+  text-decoration: none;
+  color:white;
+  border: solid #EEA43F 2px;
+}
+
+
+/*liste des matières*/
+
+
+#liste-link a:link {
+	color:#114785;
+	text-decoration:none;
+	font-size:20px;
+}
+
+#liste-link a:visited {
+	color: #114785 !important;
+	text-decoration:none !important;
+	font-size:20px !important;
+}
+
+#liste-link a:hover {
+	color: #EEA43F !important;
+	text-decoration:none !important;
+	font-size:26px !important;
+}
+
+#liste-link a:active {
+	color: #EEA43F !important;
+	text-decoration:none !important;
+	font-size:26px !important;
+}
+h3{
+	color:#114785;
+	font-size:30px;
+}
+h1{
+	color:#EEA43F;
+	font-size:60px;
+	margin-top: -4%;
+}
+.col-md-4{
+	border:solid #114785 1px;
+	height:480px;
+	background-color:white;
+}
+.liste_mat{
+	margin-top:3%;
+}
+.center-text{
+	text-align:center;
+}
+.description{
+	font-size:14px;
+	color:#114785;
+	font-style : italic;
+	padding: 7%;
+}
+
+.panel {
+    display:none;
+    text-align:justify;
+    border-radius:0px;
+}
+.mySelect{
+	margin-top:7%;
+}
+/* alter bootstrap */
+.navbar-inverse {
+    background-color: transparent;
+    border-color: transparent;
 }
