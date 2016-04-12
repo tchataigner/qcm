@@ -9,7 +9,6 @@ import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 
@@ -51,9 +50,6 @@ public class MatiereController {
 		}
 	}
 	
-
-
-
 	public String addMatiere(Matiere theMatiere, int fk_user_id) {
 		logger.info("Adding matiere: " + theMatiere);
 		try {

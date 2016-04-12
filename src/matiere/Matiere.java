@@ -1,10 +1,8 @@
 package matiere;
 
 import java.util.Map;
-import java.util.logging.Level;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 @ManagedBean
@@ -30,6 +28,7 @@ public class Matiere {
 		
 		return destination;
 	}
+
 	
 	public Matiere(int id, String name) {
 		this.id = id;
