@@ -8,30 +8,31 @@
 
 
 <ui:composition>
-<f:metadata>
-	<f:event type="preRenderView"
-		listener="#{matiereController.loadMatieres()}" />
-</f:metadata>
+	<f:metadata>
+		<f:event type="preRenderView"
+			listener="#{matiereController.loadMatieres()}" />
+	</f:metadata>
 
 	<div id="container">
-				<h:panelGroup rendered="#{sessionScope.power >= 1}">
+		<h:panelGroup rendered="#{sessionScope.power >= 1}">
 
-				<h:button value="Ajouter" styleClass="add-matiere-button"
-					outcome="/matiere/add-matiere-form" />
-			</h:panelGroup>
-			<h:form>
+			<h:button value="Ajouter" id="test" styleClass="add-matiere-button"
+				outcome="/matiere/add-matiere-form" />
+		</h:panelGroup>
+		<h:form>
 
-	
-				<ui:repeat value="#{matiereController.matieres}" var="item">
 
-					<h:commandLink>
+			<ui:repeat value="#{matiereController.matieres}" var="item">
+
+				<h:commandLink>
            #{item.name}
-    <f:setPropertyActionListener target="#{mat_id}" value="#{item.id}" />
-					</h:commandLink>
-				</ui:repeat>
+				<f:ajax execute="@form" render=":test1:submitButton" />
+				<f:setPropertyActionListener target="#{mat_id}" value="#{item.id}" />
+				</h:commandLink>
+			</ui:repeat>
 
-			</h:form>
-		</div>
+		</h:form>
+	</div>
 
 
 </ui:composition>
