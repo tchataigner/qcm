@@ -25,7 +25,7 @@ public class Matiere {
 	public String outcome(String destination){
 		FacesContext fc = FacesContext.getCurrentInstance();
 		this.id = Integer.parseInt(getIdParam(fc));
-		
+		System.out.println(this.id);
 		return destination;
 	}
 

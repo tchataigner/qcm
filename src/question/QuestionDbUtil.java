@@ -88,7 +88,7 @@ public class QuestionDbUtil {
 		try {
 			myConn = getConnection();
 
-			String sql = "insert into question (text, media, difficulty) values (?,?,?)";
+			String sql = "insert into question (text, media, difficulty, fk_matiere_id) values (?,?,?,?)";
 
 			myStmt = myConn.prepareStatement(sql);
 
@@ -96,6 +96,7 @@ public class QuestionDbUtil {
 			myStmt.setString(1, theQuestion.getText());
 			myStmt.setString(2, theQuestion.getMedia());
 			myStmt.setInt(3, theQuestion.getDifficulty());
+			myStmt.setInt(4, 1);
 			
 			myStmt.execute();			
 		}
