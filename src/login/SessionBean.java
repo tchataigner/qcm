@@ -37,4 +37,12 @@ public class SessionBean {
         else
             return null;
     }
+    
+    public static String getMatiereId() {
+        HttpSession session = getSession();
+        if (session != null)
+            return (String) session.getAttribute("matiere_id");
+        else
+            return null;
+    }
 }

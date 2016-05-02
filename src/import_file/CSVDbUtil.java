@@ -65,7 +65,7 @@ public class CSVDbUtil {
 			 
 			 myStmt.close();
 			 
-			 String sql_reponse = "insert into answer (text, correct) values (?,?)";
+			 String sql_reponse = "insert into answer (text, correct, fk_question id) values (?,?)";
 			 
 			 myStmt = myConn.prepareStatement(sql_reponse);
 			

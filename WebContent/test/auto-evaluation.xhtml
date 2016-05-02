@@ -27,12 +27,7 @@
 </h:head>
 <ui:include src="/header.xhtml" />
 <h:body>
-<div class="container">
-	<div class="row">
-		<div class="col-md-12 test_explication">
-			<h:outputText value="#{matiere.id}" />
-		</div>
-	</div>
-</div>
+
+<h:outputText value="#{sessionScope.matiere_id}" />
 </h:body>
 </html>

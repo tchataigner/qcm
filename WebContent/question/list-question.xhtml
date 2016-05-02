@@ -4,7 +4,7 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <f:metadata>
-  <f:event type="preRenderView" listener="#{questionController.loadQuestions()}"/>
+  <f:event type="preRenderView" listener="#{questionController.loadQuestions(sessionScope.matiere_id)}"/>
 </f:metadata>
 
 <h:head>

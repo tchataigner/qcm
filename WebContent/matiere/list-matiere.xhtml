@@ -27,7 +27,7 @@
 						<div class="col-md-12 liste_mat" id="liste-link">
 							<h:commandLink styleClass="toggle">
            					#{item.name}
-           					<f:ajax execute="@form" render=":test1:submitButton" />
+           					<f:ajax execute="@form" render=":test1:submitButton :test2:deleteButton :test2:manageButton" />
     						<f:setPropertyActionListener target="#{mat_id}" value="#{item.id}" />
 							</h:commandLink>
 						</div>
