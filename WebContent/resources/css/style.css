@@ -115,11 +115,6 @@ h1{
 	font-size:60px;
 	margin-top: -4%;
 }
-.col-md-4{
-	border:solid #114785 1px;
-	height:480px;
-	background-color:white;
-}
 .liste_mat{
 	margin-top:3%;
 }
@@ -141,8 +136,19 @@ h1{
 .mySelect{
 	margin-top:7%;
 }
+.test_explication{
+	border:solid #114785 1px;
+	height:480px;
+	background-color:white;
+	margin-top: 3%;
+}
 /* alter bootstrap */
 .navbar-inverse {
     background-color: transparent;
     border-color: transparent;
+}
+.col-md-4{
+	border:solid #114785 1px;
+	height:480px;
+	background-color:white;
 }
