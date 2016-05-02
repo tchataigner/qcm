@@ -4,6 +4,9 @@ import java.util.Map;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
+
+import login.SessionBean;
 
 @ManagedBean
 public class Matiere {
@@ -23,9 +26,9 @@ public class Matiere {
 	}
 	
 	public String outcome(String destination){
+		HttpSession session = SessionBean.getSession();
 		FacesContext fc = FacesContext.getCurrentInstance();
-		this.id = Integer.parseInt(getIdParam(fc));
-		System.out.println(this.id);
+		session.setAttribute("matiere_id", Integer.parseInt(getIdParam(fc)));
 		return destination;
 	}
 

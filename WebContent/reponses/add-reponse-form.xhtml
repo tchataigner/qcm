@@ -31,23 +31,20 @@
 
 	</f:facet>
 
+	<f:metadata>
+		<f:event type="preRenderView" listener="#{typeController.loadTypes()}" />
+	</f:metadata>
+
 </h:head>
 
 <h:body>
 
 	<ui:include src="/header.xhtml" />
-	<!--  <ui:include src="/teacher_menu.xhtml" /> -->
 	<div class="container">
 		<div class="row">
-			<div class="col-md-4 col-md-offset-4">
-			<h:button value="Ajouter une question pour la matière #{sessionScope.matiere_id}" outcome="/question/list-question.xhtml" />
-			</div>
+			<div class="col-md-4 col-md-offset-4"></div>
 		</div>
 	</div>
 
-
-
-
 </h:body>
 </html>
-

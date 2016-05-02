@@ -40,22 +40,28 @@ public class QuestionDbUtil {
 		return theDataSource;
 	}
 		
-	public List<Question> getQuestions() throws Exception {
+	public List<Question> getQuestions(int matiereid) throws Exception {
 
 		List<Question> questions = new ArrayList<>();
 
 		Connection myConn = null;
-		Statement myStmt = null;
+		PreparedStatement myStmt = null;
 		ResultSet myRs = null;
 		
 		try {
 			myConn = getConnection();
 
-			String sql = "select * from question order by id";
+			String sql = "select * from question where (fk_matiere_id = ?) order by id;";
 
-			myStmt = myConn.createStatement();
+			myStmt = myConn.prepareStatement(sql);
 
-			myRs = myStmt.executeQuery(sql);
+			// set params
+
+			myStmt.setInt(1, matiereid);
+			
+			myStmt.execute();
+			myRs = myStmt.executeQuery();
+			System.out.println(myRs);
 
 			// process result set
 			while (myRs.next()) {
@@ -65,9 +71,10 @@ public class QuestionDbUtil {
 				String text = myRs.getString("text");
 				String media = myRs.getString("media");
 				int difficulty = myRs.getInt("difficulty");
+				int fk_matiere_id = myRs.getInt("fk_matiere_id");
 
 				// create new student object
-				Question tempQuestion = new Question(id, text, media, difficulty);
+				Question tempQuestion = new Question(id, text, media, difficulty, fk_matiere_id);
 
 				// add it to the list of students
 				questions.add(tempQuestion);
@@ -84,11 +91,11 @@ public class QuestionDbUtil {
 
 		Connection myConn = null;
 		PreparedStatement myStmt = null;
-
+		//System.out.println(theQuestion.getFk_matiere_id());
 		try {
 			myConn = getConnection();
 
-			String sql = "insert into question (text, media, difficulty, fk_matiere_id) values (?,?,?,?)";
+			String sql = "insert into question (text, media, difficulty, fk_matiere_id, fk_type_id, fk_section_id) values (?,?,?,?,?,1)";
 
 			myStmt = myConn.prepareStatement(sql);
 
@@ -96,7 +103,8 @@ public class QuestionDbUtil {
 			myStmt.setString(1, theQuestion.getText());
 			myStmt.setString(2, theQuestion.getMedia());
 			myStmt.setInt(3, theQuestion.getDifficulty());
-			myStmt.setInt(4, 1);
+			myStmt.setInt(4, theQuestion.getFk_matiere_id());
+			myStmt.setInt(5, theQuestion.getFk_type_id());
 			
 			myStmt.execute();			
 		}
