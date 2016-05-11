@@ -43,18 +43,7 @@ html,body{
 #container form#find input {border: 1px solid #ccc; border-radius: 3px; padding: 5px 10px; width: 86%;}
 #container #content {margin-top: 20px;}
 
-.add-matiere-button {
-	border: 1px solid #666; 
-	border-radius: 5px; 
-	padding: 4px; 
-	font-size: 12px;
-	font-weight: bold;
-	width: 120px; 
-	padding: 5px 10px; 
-	
-	margin-bottom: 15px;
-	background: #cccccc;
-}
+
 
 /*start */
 
@@ -82,6 +71,27 @@ html,body{
 
 /*liste des matières*/
 
+.add-matiere-button {
+	 -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0px;
+  font-family: Arial;
+  color: #114785;
+  font-size: 20px;
+  background: white;
+  padding: 10px 20px 10px 20px;
+  border: solid #114785 2px;
+  text-decoration: none;
+  margin-top:2%;
+  margin-left:28%;
+}
+
+.add-matiere-button:hover {
+  background: #EEA43F;
+  text-decoration: none;
+  color:white;
+  border: solid #EEA43F 2px;
+}
 
 #liste-link a:link {
 	color:#114785;
@@ -142,6 +152,119 @@ h1{
 	background-color:white;
 	margin-top: 3%;
 }
+
+/*login/logout page */
+
+input[type="submit"]{
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0px;
+  font-family: Arial;
+  color: #114785;
+  font-size: 16px;
+  background: white;
+  padding: 10px 20px 10px 20px;
+  border: solid #114785 2px;
+  text-decoration: none;
+}
+
+input[type="submit"]:hover {
+  background: #EEA43F;
+  text-decoration: none;
+  color:white;
+  border: solid #EEA43F 2px;
+}
+
+.login{
+	border: solid #114785 1px;
+   	height: auto;
+  	background-color: white;
+  	padding-bottom:2%;
+  	margin-top:10%;
+}
+
+/* page gestion_aaccueil  */
+
+input[type="button"]{
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0px;
+  font-family: Arial;
+  color: #114785;
+  font-size: 16px;
+  background: white;
+  padding: 10px 20px 10px 20px;
+  border: solid #114785 2px;
+  text-decoration: none;
+  margin-top:10%
+}
+
+input[type="button"]:hover {
+  background: #EEA43F;
+  text-decoration: none;
+  color:white;
+  border: solid #EEA43F 2px;
+}
+
+.param .col-md-4{
+	height:250px;
+}
+
+/*page param_matiere*/
+
+.param-matiere{
+	margin-top:7%;
+}
+
+.param-matiere .col-md-4{
+	height:250px;
+}
+
+.param-matiere h3{
+	font-size:22px;
+}
+
+.param-matiere form{
+	margin-top:30px;
+}
+
+.param-matiere label{
+    display: inline-block;
+    text-align: left;
+    width: 46%;
+}
+
+.param-matiere input{
+	display: inline-block;
+	width: 40%;
+}
+
+.param-matiere .save{
+	margin-left: -50%;
+	margin-top: 6%;
+	margin-bottom: 6%;
+	bottom: 0;
+	position: absolute;
+}
+
+/* page list-question */
+
+.list-question .btn-style{
+	margin-top:2%;
+	margin-bottom:2%;
+}
+
+.list-question input[type="button"]{
+	margin-top:2%;
+	margin-bottom:2%;
+}
+
+.list-question input[type="submit"]{
+	margin-top:2%;
+	margin-bottom:2%;
+}
+
+
 /* alter bootstrap */
 .navbar-inverse {
     background-color: transparent;

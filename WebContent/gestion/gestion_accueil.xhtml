@@ -38,9 +38,17 @@
 	<ui:include src="/header.xhtml" />
 	<!--  <ui:include src="/teacher_menu.xhtml" /> -->
 	<div class="container">
-		<div class="row">
-			<div class="col-md-4 col-md-offset-4">
-			<h:button value="Ajouter une question pour la matière #{sessionScope.matiere_id}" outcome="/question/list-question.xhtml" />
+		<div class="row mySelect param">
+			<div class="col-md-4 center-text">
+				<h:button value="Modifier les paramètres #{sessionScope.matiere_id}" outcome="/gestion/param_matiere.xhtml" />
+				<p class="description center-text">Vous pouvez modifier le système de notation, la contrainte de temps et le nombre de questions pour la simulation d'évaluation</p>
+			</div>
+			<div class="col-md-4 center-text">
+				<h:button value="Ajouter une question pour la matière #{sessionScope.matiere_id}" outcome="/question/list-question.xhtml" />
+				<h:button value="Modifier les catégories #{sessionScope.matiere_id}" outcome="/question/list-question.xhtml" />
+			</div>
+			<div class="col-md-4 center-text">
+				<h:button value="Gérer le cours #{sessionScope.matiere_id}" outcome="/question/list-question.xhtml" />
 			</div>
 		</div>
 	</div>

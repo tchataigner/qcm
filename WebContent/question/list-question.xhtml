@@ -1,37 +1,51 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <f:metadata>
   <f:event type="preRenderView" listener="#{questionController.loadQuestions(sessionScope.matiere_id)}"/>
 </f:metadata>
 
-<h:head>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
-	<title>Questions</title>
-	
-	<h:outputStylesheet library="css" name="style.css"  />
-	
-</h:head>
+    <h:head>
+        <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+ 
+            <title>Questions</title>
+        </f:facet>
+ 
+        <f:facet name="middle">
+            <h:outputStylesheet name="bootstrap/css/bootstrap.css" />
+            
+            <h:outputStylesheet name="css/style.css" />
+            
+			<h:outputScript target="body" name="js/jquery.js" /> 
+			           
+            <h:outputScript name="bootstrap/js/bootstrap.js" />
+            
+            <h:outputScript target="body" name="js/action.js" />
+            
+        </f:facet>
+        
+ 
+    </h:head>
 
 <h:body>
+	<ui:include src="/header.xhtml" />
 
-	<div id="wrapper">
-		<div id="header">
-			<h2>Questions</h2>
-		</div>
-	</div>
+			
 
-	<div id="container">
+	<div class="container list-question">
 
 		<div id="content">
+		<h3>Questions</h3>
 		
 			<h:messages globalOnly="true" />
 		
-			<h:button value="Ajouter" styleClass="add-matiere-button" outcome="add-question-form" />
+			<h:button value="Ajouter" styleClass="btn_style" outcome="add-question-form" />
 		
 			<h:form>
 						
@@ -63,6 +77,17 @@
 					<!--  the value for each row -->
 					#{tempQuestion.difficulty}
 				</h:column>
+				
+				<h:column>
+					<!-- the column header -->
+					<f:facet name="header">Delete : </f:facet>
+					<h:commandButton value="Supprimer la question #{tempQuestion.id}"
+						action="#{questionController.deleteQuestion()}" styleClass="btn_style center-block" id="deleteButton">
+						<f:param name="id" value="#{tempQuestion.id}" />
+					</h:commandButton>
+				</h:column>
+				
+			
 			</h:dataTable>
 
 			</h:form>

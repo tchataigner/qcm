@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<f:facet name="first">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<title>primestrap</title>
+	</f:facet>
+
+	<f:facet name="middle">
+		<h:outputStylesheet name="bootstrap/css/bootstrap.css" />
+
+		<h:outputStylesheet name="css/style.css" />
+
+		<h:outputScript target="body" name="js/jquery.js" />
+
+		<h:outputScript name="bootstrap/js/bootstrap.js" />
+
+		<h:outputScript target="body" name="js/action.js" />
+
+	</f:facet>
+
+	<f:facet name="last">
+
+	</f:facet>
+
+
+</h:head>
+
+<h:body>
+
+	<ui:include src="/header.xhtml" />
+	<!--  <ui:include src="/teacher_menu.xhtml" /> -->
+	<div class="container param-matiere">
+		<div class="row">
+			<div class="col-md-4">
+				<h3 class="center-text">Système de notation</h3>
+				<h:form>
+					<h:outputLabel value="Bonne réponse: " />
+					<h:inputText value="" />
+					<h:outputLabel value="Mauvaise réponse: " />
+					<h:inputText value="" />
+					<h:outputLabel value="Absence de réponse: " />
+					<h:inputText value="" />
+
+					<h:commandButton value="Valider" styleClass="save"
+						action="#{matiereController.addMatiere(matiere, sessionScope.userid)}" />
+				</h:form>
+			</div>
+			<div class="col-md-4">
+				<h3 class="center-text">Durée d'une évaluation</h3>
+				<h:form>
+					<h:outputLabel value="Heure: " />
+					<h:inputText value="#{duration.hour}" />
+					<h:outputText value="#{duration.hour}" />
+					<h:outputLabel value="Minute : " />
+					<h:inputText value="#{duration.min}" />
+
+					<h:commandButton value="Valider" styleClass="save"
+						action="#{paramController.addDuration(duration)}">
+						<f:param name="fk_matiere_id" value="#{sessionScope.matiere_id}" />
+					</h:commandButton>
+				</h:form>
+			</div>
+			<div class="col-md-4">
+				<h3 class="center-text">Nombre de questions pour la simulation
+					d'examen</h3>
+				<h:form>
+					<h:outputLabel value="Nombre de questions: " />
+					<h:inputText value="" />
+
+					<h:commandButton value="Valider" styleClass="save"
+						action="#{matiereController.addMatiere(matiere, sessionScope.userid)}" />
+				</h:form>
+			</div>
+		</div>
+	</div>
+
+
+
+
+</h:body>
+</html>
