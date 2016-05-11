@@ -1,4 +1,4 @@
-package question;
+package answer;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,21 +14,21 @@ import javax.sql.DataSource;
 
 import question.Question;
 
-public class QuestionDbUtil {
+public class AnswerDbUtil {
 
-	private static QuestionDbUtil instance;
+	private static AnswerDbUtil instance;
 	private DataSource dataSource;
 	private String jndiName = "java:comp/env/jdbc/qcm";
 	
-	public static QuestionDbUtil getInstance() throws Exception {
+	public static AnswerDbUtil getInstance() throws Exception {
 		if (instance == null) {
-			instance = new QuestionDbUtil();
+			instance = new AnswerDbUtil();
 		}
 		
 		return instance;
 	}
 	
-	private QuestionDbUtil() throws Exception {		
+	private AnswerDbUtil() throws Exception {		
 		dataSource = getDataSource();
 	}
 
@@ -40,9 +40,9 @@ public class QuestionDbUtil {
 		return theDataSource;
 	}
 		
-	public List<Question> getQuestions(int matiereid) throws Exception {
+	public List<Answer> getAnswers(int questionid) throws Exception {
 
-		List<Question> questions = new ArrayList<>();
+		List<Answer> answers = new ArrayList<>();
 
 		Connection myConn = null;
 		PreparedStatement myStmt = null;
@@ -51,13 +51,13 @@ public class QuestionDbUtil {
 		try {
 			myConn = getConnection();
 
-			String sql = "select * from question where (fk_matiere_id = ?) order by id;";
+			String sql = "select * from answer where (fk_question_id = ?) order by rand();";
 
 			myStmt = myConn.prepareStatement(sql);
 
 			// set params
 
-			myStmt.setInt(1, matiereid);
+			myStmt.setInt(1, questionid);
 			
 			myStmt.execute();
 			myRs = myStmt.executeQuery();
@@ -68,52 +68,40 @@ public class QuestionDbUtil {
 				// retrieve data from result set row
 				int id = myRs.getInt("id");
 				String text = myRs.getString("text");
-				String media = myRs.getString("media");
-				int difficulty = myRs.getInt("difficulty");
-				int fk_matiere_id = myRs.getInt("fk_matiere_id");
-
+				int correct = myRs.getInt("correct");
+				int fk_question_id = myRs.getInt("fk_question_id");
 				// create new student object
-				Question tempQuestion = new Question(id, text, media, difficulty, fk_matiere_id);
+				Answer tempAnswer = new Answer(id, text, correct, fk_question_id);
 
 				// add it to the list of students
-				questions.add(tempQuestion);
+				answers.add(tempAnswer);
 			}
 			
-			return questions;		
+			return answers;		
 		}
 		finally {
 			close (myConn, myStmt, myRs);
 		}
 	}
 	
-	public void addQuestion(Question theQuestion) throws Exception {
-		System.out.println("toto1");
-
+	public void addAnswer(Answer theAnswer) throws Exception {
 		Connection myConn = null;
 		PreparedStatement myStmt = null;
 		//System.out.println(theQuestion.getFk_matiere_id());
 		try {
 			myConn = getConnection();
 
-			String sql = "insert into question (text, media, difficulty, fk_matiere_id, fk_type_id, fk_section_id) values (?,?,?,?,?,1)";
+			String sql = "insert into answer (text, correct, fk_question_id) values (?,?,?)";
 
-			myStmt = myConn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			myStmt = myConn.prepareStatement(sql);
 
 			// set params
-			myStmt.setString(1, theQuestion.getText());
-			myStmt.setString(2, theQuestion.getMedia());
-			myStmt.setInt(3, theQuestion.getDifficulty());
-			myStmt.setInt(4, theQuestion.getFk_matiere_id());
-			myStmt.setInt(5, theQuestion.getFk_type_id());
+			myStmt.setString(1, theAnswer.getText());
+			myStmt.setInt(2, theAnswer.getCorrect());
+			myStmt.setInt(3, theAnswer.getFk_question_id());
+
 			
-			myStmt.execute();	
-
-			ResultSet generatedKeys = myStmt.getGeneratedKeys();
-
-			if (generatedKeys.next()) {
-				System.out.println(generatedKeys.getInt(1));
-				theQuestion.setId(generatedKeys.getInt(1));
-			}
+			myStmt.execute();			
 		}
 		finally {
 			close (myConn, myStmt);

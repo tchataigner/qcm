@@ -66,7 +66,7 @@ public class QuestionController {
 			addErrorMessage(exc);
 			return null;
 		}
-		return "/reponses/add-reponse-form?faces-redirect=true";
+		return "/reponses/add-reponse-form";
 	}
 
 	private void addErrorMessage(Exception exc) {
