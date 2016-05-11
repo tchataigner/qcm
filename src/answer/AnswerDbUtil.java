@@ -93,7 +93,7 @@ public class AnswerDbUtil {
 
 			String sql = "insert into answer (text, correct, fk_question_id) values (?,?,?)";
 
-			myStmt = myConn.prepareStatement(sql);
+			myStmt = myConn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
 			// set params
 			myStmt.setString(1, theAnswer.getText());
@@ -101,7 +101,8 @@ public class AnswerDbUtil {
 			myStmt.setInt(3, theAnswer.getFk_question_id());
 
 			
-			myStmt.execute();			
+			myStmt.execute();	
+			
 		}
 		finally {
 			close (myConn, myStmt);

@@ -42,6 +42,7 @@
 				<h3 class="center-text">Liste des matières</h3>
          		<ui:include src="/matiere/list-matiere.xhtml" />  
          	</div>
+         	#{answer.fk_question_id}
 	         <!-- Partie élève -->
 	        
 	         <h:panelGroup rendered="#{sessionScope.power == 0}">

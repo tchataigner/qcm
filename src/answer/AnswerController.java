@@ -76,7 +76,6 @@ public class AnswerController {
 				
 				map[i] = new Answer();
 				
-				
 				map[i].setText(text);
 				
 				map[i].setCorrect(correct_int);
@@ -91,7 +90,7 @@ public class AnswerController {
 			addErrorMessage(exc);
 			return null;
 		}
-		return "/reponses/add-reponse-form?faces-redirect=true";
+		return "/help/add-help-form.xhtml?question="+fk_question_id;
 	}
 
 	public String getQuestionIdParam(FacesContext fc) {
