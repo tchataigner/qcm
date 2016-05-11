@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 
-<f:metadata>
-  <f:event type="preRenderView" listener="#{questionController.loadQuestions()}"/>
-</f:metadata>
+
 
 <h:head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 	<title>Update Student</title>
+
 	 <h:outputStylesheet name="bootstrap/css/bootstrap.css" />
             
      <h:outputStylesheet name="css/dashboard.css" />
@@ -24,10 +25,33 @@
 	
 	<h:outputStylesheet library="css" name="add-student-style.css"  />
 	
+
 </h:head>
 <ui:include src="/header.xhtml" />
 <h:body>
 
-<h:outputText value="#{sessionScope.matiere_id}" />
+id mat :
+	<h:outputText value="#{sessionScope.matiere_id}" />
+
+items :
+<h:form>
+		<c:forEach items="#{evaluationController.questions}" var="item">
+			<div class="row">
+				<div class="col-md-12 liste_mat" id="liste-link">
+					Question : #{item.text} <span id="#{item.id}"> 
+					<h:selectManyCheckbox id="question_#{item.id}">
+							<f:selectItems
+								value="#{evaluationController.loadAnswer(item.id)}"
+								var="answers" itemLabel="#{answers.text}"
+								itemValue="#{answers.id}" />
+						</h:selectManyCheckbox>
+					</span>
+				</div>
+			</div>
+		</c:forEach>
+		<h:commandButton id="submitButton" value="envoyer"
+			action="/test/auto-evaluation.xhtml"
+			styleClass="btn_style center-block" />
+	</h:form>
 </h:body>
 </html>

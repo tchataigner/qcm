@@ -31,10 +31,6 @@
 
 	</f:facet>
 
-	<f:metadata>
-		<f:event type="preRenderView" listener="#{typeController.loadTypes()}" />
-	</f:metadata>
-
 </h:head>
 
 <h:body>
@@ -42,7 +38,66 @@
 	<ui:include src="/header.xhtml" />
 	<div class="container">
 		<div class="row">
-			<div class="col-md-4 col-md-offset-4"></div>
+			<div class="col-md-4 col-md-offset-4">
+				<h3>Ajouter une Question</h3>
+
+				<h:messages globalOnly="true" />
+
+				<h:form id="form_answer" style="margin-top: 10px;">
+					<h:panelGrid columns="3">
+
+						<h:outputLabel>Text*:</h:outputLabel>
+						<h:inputText id="text0" required="true"
+							requiredMessage="L'énnoncé de la réponse est obligatoire." />
+						<h:message for="text" />
+
+						<h:outputLabel>Vrai/Faux*:</h:outputLabel>
+						<h:selectOneRadio id="correct0">
+							<f:selectItem itemValue="1" itemLabel="Vrai" />
+							<f:selectItem itemValue="0" itemLabel="Faux" />
+						</h:selectOneRadio>
+						<br />
+						<h:outputLabel>Text2*:</h:outputLabel>
+						<h:inputText required="true" id="text1"
+							requiredMessage="L'énnoncé de la réponse est obligatoire." />
+						<h:message for="text" />
+
+						<h:outputLabel>Vrai/Faux*:</h:outputLabel>
+						<h:selectOneRadio id="correct1">
+							<f:selectItem itemValue="1" itemLabel="Vrai" />
+							<f:selectItem itemValue="0" itemLabel="Faux" />
+						</h:selectOneRadio>
+						<br />
+						<h:outputLabel>Text3*:</h:outputLabel>
+						<h:inputText required="true" id="text2"
+							requiredMessage="L'énnoncé de la réponse est obligatoire." />
+						<h:message for="text" />
+
+						<h:outputLabel>Vrai/Faux*:</h:outputLabel>
+						<h:selectOneRadio id="correct2">
+							<f:selectItem itemValue="1" itemLabel="Vrai" />
+							<f:selectItem itemValue="0" itemLabel="Faux" />
+						</h:selectOneRadio>
+						<br />
+						<h:outputLabel>Text4*:</h:outputLabel>
+						<h:inputText required="true" id="text13"
+							requiredMessage="L'énnoncé de la réponse est obligatoire." />
+						<h:message for="text" />
+
+						<h:outputLabel>Vrai/Faux*:</h:outputLabel>
+						<h:selectOneRadio id="correct3">
+							<f:selectItem itemValue="1" itemLabel="Vrai" />
+							<f:selectItem itemValue="0" itemLabel="Faux" />
+						</h:selectOneRadio>
+						<br />
+						<h:commandButton value="Valider" styleClass="save"
+							action="#{answerController.addAnswer()}">
+							<f:param name="fk_question_id" value="#{question.id}" />
+						</h:commandButton>
+
+					</h:panelGrid>
+				</h:form>
+			</div>
 		</div>
 	</div>
 

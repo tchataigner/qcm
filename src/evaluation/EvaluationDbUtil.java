@@ -1,4 +1,4 @@
-package question;
+package evaluation;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,23 +12,24 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import answer.Answer;
 import question.Question;
 
-public class QuestionDbUtil {
+public class EvaluationDbUtil {
 
-	private static QuestionDbUtil instance;
+	private static EvaluationDbUtil instance;
 	private DataSource dataSource;
 	private String jndiName = "java:comp/env/jdbc/qcm";
 	
-	public static QuestionDbUtil getInstance() throws Exception {
+	public static EvaluationDbUtil getInstance() throws Exception {
 		if (instance == null) {
-			instance = new QuestionDbUtil();
+			instance = new EvaluationDbUtil();
 		}
 		
 		return instance;
 	}
 	
-	private QuestionDbUtil() throws Exception {		
+	private EvaluationDbUtil() throws Exception {		
 		dataSource = getDataSource();
 	}
 
@@ -51,7 +52,7 @@ public class QuestionDbUtil {
 		try {
 			myConn = getConnection();
 
-			String sql = "select * from question where (fk_matiere_id = ?) order by id;";
+			String sql = "select * from question where (fk_matiere_id = ?) order by rand();";
 
 			myStmt = myConn.prepareStatement(sql);
 
@@ -86,39 +87,49 @@ public class QuestionDbUtil {
 		}
 	}
 	
-	public void addQuestion(Question theQuestion) throws Exception {
-		System.out.println("toto1");
+	public List<Answer> getAnswers(int questionId) throws Exception {
+
+		List<Answer> answers = new ArrayList<>();
 
 		Connection myConn = null;
 		PreparedStatement myStmt = null;
-		//System.out.println(theQuestion.getFk_matiere_id());
+		ResultSet myRs = null;
+		
 		try {
 			myConn = getConnection();
 
-			String sql = "insert into question (text, media, difficulty, fk_matiere_id, fk_type_id, fk_section_id) values (?,?,?,?,?,1)";
+			String sql = "select * from answer where (fk_question_id = ?) order by id;";
 
-			myStmt = myConn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			myStmt = myConn.prepareStatement(sql);
 
 			// set params
-			myStmt.setString(1, theQuestion.getText());
-			myStmt.setString(2, theQuestion.getMedia());
-			myStmt.setInt(3, theQuestion.getDifficulty());
-			myStmt.setInt(4, theQuestion.getFk_matiere_id());
-			myStmt.setInt(5, theQuestion.getFk_type_id());
+
+			myStmt.setInt(1, questionId);
 			
-			myStmt.execute();	
+			myStmt.execute();
+			myRs = myStmt.executeQuery();
 
-			ResultSet generatedKeys = myStmt.getGeneratedKeys();
+			// process result set
+			while (myRs.next()) {
+				
+				// retrieve data from result set row
+				int id = myRs.getInt("id");
+				String text = myRs.getString("text");
+				int correct = myRs.getInt("correct");
+				int fk_question_id = myRs.getInt("fk_question_id");
 
-			if (generatedKeys.next()) {
-				System.out.println(generatedKeys.getInt(1));
-				theQuestion.setId(generatedKeys.getInt(1));
+				// create new student object
+				Answer tempAnswer = new Answer(id, text, correct, fk_question_id);
+
+				// add it to the list of students
+				answers.add(tempAnswer);
 			}
+			
+			return answers;		
 		}
 		finally {
-			close (myConn, myStmt);
+			close (myConn, myStmt, myRs);
 		}
-		
 	}
 	
 	private Connection getConnection() throws Exception {
@@ -127,11 +138,7 @@ public class QuestionDbUtil {
 		
 		return theConn;
 	}
-	
-	private void close(Connection theConn, Statement theStmt) {
-		close(theConn, theStmt, null);
-	}
-	
+
 	private void close(Connection theConn, Statement theStmt, ResultSet theRs) {
 
 		try {

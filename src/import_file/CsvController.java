@@ -18,6 +18,7 @@ import import_file.CSVDbUtil;
 
 @ManagedBean(name="cvsController")
 public class CsvController {
+	
 	private String fileContent;
 	private CSVDbUtil cvsDbUtil;
 	private Logger logger = Logger.getLogger(getClass().getName());
@@ -51,10 +52,7 @@ public class CsvController {
 				for (Map.Entry<Integer, String> entry : maps.entrySet()) {
 					String[] values = entry.getValue().split(";");
 					
-					
-					
 					cvsDbUtil.uploadCVS(values);
-
 
 				}
 				
