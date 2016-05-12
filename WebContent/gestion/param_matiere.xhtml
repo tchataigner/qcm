@@ -30,7 +30,10 @@
 	<f:facet name="last">
 
 	</f:facet>
-
+	<f:metadata>
+	<f:event type="preRenderView"
+		listener="#{paramController.loadDuration(sessionScope.matiere_id)}" />
+	</f:metadata>
 
 </h:head>
 

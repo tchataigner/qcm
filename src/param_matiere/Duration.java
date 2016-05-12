@@ -1,11 +1,6 @@
 package param_matiere;
 
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.component.html.HtmlInputText;
-import javax.faces.context.FacesContext;
-
-import param_matiere.ParamController;
 
 @ManagedBean
 public class Duration {
@@ -14,21 +9,10 @@ public class Duration {
 	private int hour;
 	private int min;
 	private int fk_matiere_id;
-	private ParamController paramController;
 
-	@PostConstruct
-	public void init() {
-		
-		int matiereId = (int) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("matiere_id");
-		int[] durations = paramController.loadDuration(matiereId);	
-		System.out.println(durations[0]);
-		setHour(durations[0]);
-		setMin(durations[1]);
-	}
-	
 	
 	public Duration() {
-		
+
 	}
 
 	public Duration(int id, int hour, int min, int fk_matiere_id) {

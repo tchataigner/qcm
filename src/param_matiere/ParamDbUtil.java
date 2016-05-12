@@ -4,15 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
+
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
-
-import question.Question;
 
 public class ParamDbUtil {
 	
@@ -68,9 +65,7 @@ public class ParamDbUtil {
 	
 	/* get duration */
 	
-	public int[] getDuration(int matiereid) throws Exception {
-
-		int[] duration = new int[2];
+	public Duration getDuration(int matiereid) throws Exception {
 
 		Connection myConn = null;
 		PreparedStatement myStmt = null;
@@ -87,9 +82,10 @@ public class ParamDbUtil {
 
 			myStmt.setInt(1, matiereid);
 			
+			Duration theDuration = null;
+			
 			myStmt.execute();
 			myRs = myStmt.executeQuery();
-			System.out.println(myRs);
 
 			// process result set
 			while (myRs.next()) {
@@ -101,11 +97,10 @@ public class ParamDbUtil {
 				int fk_matiere_id = myRs.getInt("fk_matiere_id");
 
 				// add it to the list of students
-				duration[0] = hour;
-				duration[1] = min;
+				theDuration = new Duration(id, hour, min, fk_matiere_id);
 			}
 			
-			return duration;		
+			return theDuration;		
 		}
 		finally {
 			close (myConn, myStmt, myRs);
