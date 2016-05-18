@@ -29,29 +29,8 @@
 </h:head>
 <ui:include src="/header.xhtml" />
 <h:body>
-
-id mat :
-	<h:outputText value="#{sessionScope.matiere_id}" />
-
-items :
-<h:form>
-		<c:forEach items="#{evaluationController.questions}" var="item">
-			<div class="row">
-				<div class="col-md-12 liste_mat" id="liste-link">
-					Question : #{item.text} <span id="#{item.id}"> 
-					<h:selectManyCheckbox id="question_#{item.id}" value="#{evaluation.eval[item.id]}">
-							<f:selectItems
-								value="#{evaluationController.loadAnswer(item.id)}"
-								var="answers" itemLabel="#{answers.text}"
-								itemValue="#{answers.id}" />
-						</h:selectManyCheckbox>
-					</span>
-				</div>
-			</div>
-		</c:forEach>
-		<h:commandButton id="submitButton" value="envoyer"
-			action="#{evaluationController.correctEvaluation(evaluation)}"
-			styleClass="btn_style center-block" />
-	</h:form>
+<br/><br/>
+Pourcentage de réussite :
+	<h:outputText value="#{total}"/>%
 </h:body>
 </html>

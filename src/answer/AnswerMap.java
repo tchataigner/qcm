@@ -11,18 +11,12 @@ import javax.faces.bean.ManagedBean;
 
 @ManagedBean
 public class AnswerMap {
-
-	private Answer[] map;
+	private Map<Integer, Answer> answers;
 
 	public AnswerMap() {
-		
+		answers = new HashMap<Integer, Answer>();
+
 	}
-	
-	@PostConstruct
-	public void init(){
-		map = new Answer[4];
-		System.out.println(map[1]);
-		}
 
 	public Answer[] getMap() {
 		return map;

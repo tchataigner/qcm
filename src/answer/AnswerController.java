@@ -67,7 +67,7 @@ public class AnswerController {
 			
 			for(int i = 0;i<=1;i++) {
 
-				
+				System.out.println("form_answer:text"+i);
 				String text = request.getParameter("form_answer:text"+i);
 				
 				String correct = request.getParameter("form_answer:correct"+i);
