@@ -70,6 +70,14 @@
 							<f:selectItem itemValue="2" itemLabel="Difficile" />
 						</h:selectOneMenu>
 						<br />
+						<h:outputLabel>Commentaire:</h:outputLabel>
+						<h:inputText value="#{question.commentaire}" id="commentaire" />
+						<h:message for="commentaire" />
+						<br />
+						<h:outputLabel>Aide:</h:outputLabel>
+						<h:inputText value="#{question.aide}" id="aide" />
+						<h:message for="aide" />
+						<br />
 						<h:commandButton value="Valider" styleClass="save"
 							action="#{questionController.addQuestion(question)}">
 							<f:param name="fk_matiere_id" value="#{sessionScope.matiere_id}" />

@@ -71,9 +71,11 @@ public class QuestionDbUtil {
 				String media = myRs.getString("media");
 				int difficulty = myRs.getInt("difficulty");
 				int fk_matiere_id = myRs.getInt("fk_matiere_id");
-
+				String commentaire = myRs.getString("commentaire");
+				String aide = myRs.getString("aide");
+				
 				// create new student object
-				Question tempQuestion = new Question(id, text, media, difficulty, fk_matiere_id);
+				Question tempQuestion = new Question(id, text, media, difficulty, fk_matiere_id, commentaire, aide);
 
 				// add it to the list of students
 				questions.add(tempQuestion);
@@ -95,7 +97,7 @@ public class QuestionDbUtil {
 		try {
 			myConn = getConnection();
 
-			String sql = "insert into question (text, media, difficulty, fk_matiere_id, fk_type_id, fk_section_id) values (?,?,?,?,?,1)";
+			String sql = "insert into question (text, media, difficulty, fk_matiere_id, fk_type_id, fk_section_id, commentaire, aide) values (?,?,?,?,?,1,?,?)";
 
 			myStmt = myConn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
@@ -105,6 +107,8 @@ public class QuestionDbUtil {
 			myStmt.setInt(3, theQuestion.getDifficulty());
 			myStmt.setInt(4, theQuestion.getFk_matiere_id());
 			myStmt.setInt(5, theQuestion.getFk_type_id());
+			myStmt.setString(6, theQuestion.getCommentaire());
+			myStmt.setString(7, theQuestion.getAide());
 			
 			myStmt.execute();	
 

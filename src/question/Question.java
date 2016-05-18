@@ -12,18 +12,21 @@ public class Question {
 	private int difficulty;
 	private int fk_matiere_id;
 	private int fk_type_id;
-	
+	private String commentaire;
+	private String aide;
 	
 	public Question() {
 
 	}
 	
-	public Question(int id, String text, String media, int difficulty, int fk_matiere_id) {
+	public Question(int id, String text, String media, int difficulty, int fk_matiere_id, String commentaire, String aide) {
 		this.id = id;
 		this.text = text;
 		this.media = media;
 		this.difficulty = difficulty;
 		this.fk_matiere_id = fk_matiere_id;
+		this.commentaire = commentaire;
+		this.aide = aide;
 	}
 
 	public int getId() {
@@ -72,6 +75,22 @@ public class Question {
 
 	public void setFk_type_id(int fk_type_id) {
 		this.fk_type_id = fk_type_id;
+	}
+
+	public String getCommentaire() {
+		return commentaire;
+	}
+
+	public void setCommentaire(String commentaire) {
+		this.commentaire = commentaire;
+	}
+
+	public String getAide() {
+		return aide;
+	}
+
+	public void setAide(String aide) {
+		this.aide = aide;
 	}
 
 
