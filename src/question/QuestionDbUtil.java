@@ -73,7 +73,7 @@ public class QuestionDbUtil {
 				int fk_matiere_id = myRs.getInt("fk_matiere_id");
 				String commentaire = myRs.getString("commentaire");
 				String aide = myRs.getString("aide");
-				
+
 				// create new student object
 				Question tempQuestion = new Question(id, text, media, difficulty, fk_matiere_id, commentaire, aide);
 

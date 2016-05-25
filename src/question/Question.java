@@ -14,6 +14,7 @@ public class Question {
 	private int fk_type_id;
 	private String commentaire;
 	private String aide;
+
 	
 	public Question() {
 

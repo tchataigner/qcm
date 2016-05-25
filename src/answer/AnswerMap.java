@@ -1,38 +1,33 @@
-/*package answer;
-
+package answer;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 
 
 @ManagedBean
 public class AnswerMap {
-
-	private Answer[] map;
+	private Map<Integer, String> text;
+	private Map<Integer, String> correct;
 
 	public AnswerMap() {
-		
-	}
-	
-	@PostConstruct
-	public void init(){
-		map = new Answer[4];
-		System.out.println(map[1]);
-		}
-
-	public Answer[] getMap() {
-		return map;
+		text = new HashMap<Integer, String>();
+		correct = new HashMap<Integer, String>();
 	}
 
-	public void setMap(Answer[] map) {
-		this.map = map;
+	public Map<Integer, String> getText() {
+		System.out.println("Inserted Text get : "+text);
+
+		return text;
 	}
-	
-	public void setCorrectIndex(int index) {
-		map[index].setCorrect();
+
+
+	public Map<Integer, String> getCorrect() {
+		System.out.println("Inserted Correct get : "+correct);
+
+		return correct;
 	}
-}*/
+
+
+}

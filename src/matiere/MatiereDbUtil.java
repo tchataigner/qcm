@@ -125,6 +125,7 @@ public class MatiereDbUtil {
 		
 	}
 	
+	
 	private Connection getConnection() throws Exception {
 
 		Connection theConn = dataSource.getConnection();

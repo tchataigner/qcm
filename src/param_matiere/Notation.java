@@ -16,7 +16,14 @@ public class Notation {
 		
 	}
 
-
+	public Notation(int id, int correct_value, int incorrect_value, int noanswer_value, int fk_matiere_id) {
+		this.id = id;
+		this.correct_value = correct_value;
+		this.incorrect_value = incorrect_value;
+		this.noanswer_value = noanswer_value;
+		this.fk_matiere_id = fk_matiere_id;
+	}
+	
 	public int getId() {
 		return id;
 	}

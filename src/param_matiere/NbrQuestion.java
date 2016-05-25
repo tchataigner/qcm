@@ -14,7 +14,12 @@ public class NbrQuestion {
 		
 	}
 
-
+	public NbrQuestion(int id, int nbr, int fk_matiere_id) {
+		this.id = id;
+		this.nbr = nbr;
+		this.fk_matiere_id = fk_matiere_id;
+	}
+	
 	public int getId() {
 		return id;
 	}
