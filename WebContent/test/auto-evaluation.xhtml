@@ -3,7 +3,8 @@
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
 
 
 
@@ -24,6 +25,8 @@
 	<h:outputStylesheet library="css" name="style.css"  />
 	
 	<h:outputStylesheet library="css" name="add-student-style.css"  />
+	            <h:outputScript target="body" name="js/app.js" />
+
 	
 
 </h:head>
@@ -34,7 +37,7 @@ id mat :
 	<h:outputText value="#{sessionScope.matiere_id}" />
 
 items :
-<h:form>
+<h:form id="auto">
 		<c:forEach items="#{evaluationController.questions}" var="item">
 			<div class="row">
 				<div class="col-md-12 liste_mat" id="liste-link">
@@ -49,9 +52,12 @@ items :
 				</div>
 			</div>
 		</c:forEach>
+		<h:inputHidden id="y" value="#{evaluation.nbr}" />
 		<h:commandButton id="submitButton" value="envoyer"
 			action="#{evaluationController.correctEvaluation(evaluation)}"
 			styleClass="btn_style center-block" />
 	</h:form>
+	         		<button id="next">test</button>
+	
 </h:body>
 </html>

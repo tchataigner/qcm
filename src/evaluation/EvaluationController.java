@@ -85,14 +85,13 @@ public class EvaluationController {
 	public String correctEvaluation(Evaluation evaluation) {
 		try {
 			float total = 0;
-			float nbr_question_answered = 0;
+			float nbr_question_answered = evaluation.getNbr();
 			evaluationDbUtil = EvaluationDbUtil.getInstance();
 			answersDbUtil = AnswerDbUtil.getInstance();
 
 			Map<Integer, String[]> eval = evaluation.getEval();
 			// System.out.println("Int : "+Arrays.toString(eval.get(80)));
 			for (Entry<Integer, String[]> entry : eval.entrySet()) {
-				nbr_question_answered++;
 				String[] strArray = (String[]) entry.getValue();
 				int[] test = Arrays.asList(strArray).stream().mapToInt(Integer::parseInt).toArray();
 				List<Integer> answers = new ArrayList<Integer>();

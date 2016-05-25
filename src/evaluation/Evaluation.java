@@ -11,6 +11,7 @@ public class Evaluation {
 	private Map<Integer, String[]> eval;
 	private Integer[] answers;
 	private Integer question;
+	private int nbr;
 
 	public Evaluation() {
 		eval = new HashMap<Integer, String[]>();
@@ -38,6 +39,14 @@ public class Evaluation {
 
 	public void setEval(Map<Integer, String[]> eval) {
 		this.eval = eval;
+	}
+
+	public int getNbr() {
+		return nbr;
+	}
+
+	public void setNbr(int nbr) {
+		this.nbr = nbr;
 	}
 	
 	

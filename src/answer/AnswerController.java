@@ -1,8 +1,10 @@
 package answer;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -51,38 +53,27 @@ public class AnswerController {
 		}
 	}
 
-	public String addAnswer() {
+	public String addAnswer(AnswerMap answermap) {
 		
+		Map<Integer, String> text_answers = answermap.getText();
+		Map<Integer, String> correct_answers = answermap.getCorrect();
 
-		FacesContext fc = FacesContext.getCurrentInstance();
-		int fk_question_id = Integer.parseInt(getQuestionIdParam(fc));
-
-		
-		
-		HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();		
-
-		try {
-			map = new Answer[4];
-
+		Map<String, Integer> answers = new HashMap<String, Integer>();
+		for (int i = 1; i <= text_answers.size(); i++) {
+			String text = text_answers.get(Integer.toString(i));
+			String correct = correct_answers.get(Integer.toString(i));
 			
-			for(int i = 0;i<=1;i++) {
-
-				System.out.println("form_answer:text"+i);
-				String text = request.getParameter("form_answer:text"+i);
-				
-				String correct = request.getParameter("form_answer:correct"+i);
-
-				int correct_int = Integer.parseInt(correct);
-				
-				map[i] = new Answer();
-				
-				map[i].setText(text);
-				
-				map[i].setCorrect(correct_int);
-				
-				map[i].setFk_question_id(fk_question_id);
-
-				answerDbUtil.addAnswer(map[i]);
+			answers.put(text, Integer.parseInt(correct));
+		}
+		
+		FacesContext fc = FacesContext.getCurrentInstance();
+		
+		int fk_question_id = getQuestionIdParam(fc);
+		
+		try {
+		answerDbUtil = AnswerDbUtil.getInstance();
+			for (Entry<String, Integer> a : answers.entrySet()) {
+				answerDbUtil.addAnswer(a.getKey(), a.getValue(), fk_question_id);
 			}
 			//answerDbUtil.addAnswer(theAnswer);
 		} catch (Exception exc) {
@@ -90,13 +81,14 @@ public class AnswerController {
 			addErrorMessage(exc);
 			return null;
 		}
-		return "/help/add-help-form.xhtml?question="+fk_question_id;
+		return "/index.xhtml";
 	}
 
-	public String getQuestionIdParam(FacesContext fc) {
+	public int getQuestionIdParam(FacesContext fc) {
 
 		Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
-		return params.get("fk_question_id");
+		int fk_question_id = Integer.parseInt(params.get("fk_question_id"));
+		return fk_question_id;
 
 	}
 	
