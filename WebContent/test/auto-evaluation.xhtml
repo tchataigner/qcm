@@ -14,20 +14,21 @@
 
 	<title>Update Student</title>
 
-	 <h:outputStylesheet name="bootstrap/css/bootstrap.css" />
-            
-     <h:outputStylesheet name="css/dashboard.css" />
-            
-     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" />
-            
-    <h:outputScript name="bootstrap/js/bootstrap.js" />
-    
-	<h:outputStylesheet library="css" name="style.css"  />
-	
-	<h:outputStylesheet library="css" name="add-student-style.css"  />
-	            <h:outputScript target="body" name="js/app.js" />
+	<h:outputStylesheet name="bootstrap/css/bootstrap.css" />
 
-	
+	<h:outputStylesheet name="css/dashboard.css" />
+
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" />
+
+	<h:outputScript name="bootstrap/js/bootstrap.js" />
+
+	<h:outputStylesheet library="css" name="style.css" />
+
+	<h:outputStylesheet library="css" name="add-student-style.css" />
+	<h:outputScript target="body" name="js/app.js" />
+
+
 
 </h:head>
 <ui:include src="/header.xhtml" />
@@ -41,14 +42,14 @@ items :
 		<c:forEach items="#{evaluationController.questions}" var="item">
 			<div class="row">
 				<div class="col-md-12 liste_mat" id="liste-link">
-					Question : #{item.text} <span id="#{item.id}"> 
-					<h:selectManyCheckbox id="question_#{item.id}" value="#{evaluation.eval[item.id]}">
+					Question : #{item.text} <span id="#{item.id}"> <h:selectManyCheckbox
+							id="question_#{item.id}" value="#{evaluation.eval[item.id]}">
 							<f:selectItems
 								value="#{evaluationController.loadAnswer(item.id)}"
 								var="answers" itemLabel="#{answers.text}"
 								itemValue="#{answers.id}" />
 						</h:selectManyCheckbox>
-					</span>
+					</span> Aide à la réponse : #{item.aide} <span id="#{item.id}"> </span>
 				</div>
 			</div>
 		</c:forEach>
@@ -57,7 +58,7 @@ items :
 			action="#{evaluationController.correctEvaluation(evaluation)}"
 			styleClass="btn_style center-block" />
 	</h:form>
-	         		<button id="next">test</button>
-	
+	<button id="next">test</button>
+
 </h:body>
 </html>
