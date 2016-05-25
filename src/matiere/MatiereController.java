@@ -83,6 +83,7 @@ public class MatiereController {
 		return "/test/list-matiere.xhtml";
 	}
 	
+	
 	private void addErrorMessage(Exception exc) {
 		FacesMessage message = new FacesMessage("Error: " + exc.getMessage());
 		FacesContext.getCurrentInstance().addMessage(null, message);

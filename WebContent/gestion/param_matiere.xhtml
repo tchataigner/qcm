@@ -33,6 +33,10 @@
 	<f:metadata>
 	<f:event type="preRenderView"
 		listener="#{paramController.loadDuration(sessionScope.matiere_id)}" />
+	<f:event type="preRenderView"
+		listener="#{paramController.loadNbrQuestion(sessionScope.matiere_id)}" />
+	<f:event type="preRenderView"
+		listener="#{paramController.loadNotation(sessionScope.matiere_id)}" />
 	</f:metadata>
 
 </h:head>
@@ -47,14 +51,16 @@
 				<h3 class="center-text">Système de notation</h3>
 				<h:form>
 					<h:outputLabel value="Bonne réponse: " />
-					<h:inputText value="" />
+					<h:inputText value="#{notation.correct_value}" />
 					<h:outputLabel value="Mauvaise réponse: " />
-					<h:inputText value="" />
+					<h:inputText value="#{notation.incorrect_value}" />
 					<h:outputLabel value="Absence de réponse: " />
-					<h:inputText value="" />
+					<h:inputText value="#{notation.noanswer_value}" />
 
 					<h:commandButton value="Valider" styleClass="save"
-						action="#{matiereController.addMatiere(matiere, sessionScope.userid)}" />
+						action="#{paramController.addNotation(notation)}" >
+						<f:param name="fk_matiere_id" value="#{sessionScope.matiere_id}" />
+					</h:commandButton>
 				</h:form>
 			</div>
 			<div class="col-md-4">
@@ -62,7 +68,6 @@
 				<h:form>
 					<h:outputLabel value="Heure: " />
 					<h:inputText value="#{duration.hour}" />
-					<h:outputText value="#{duration.hour}" />
 					<h:outputLabel value="Minute : " />
 					<h:inputText value="#{duration.min}" />
 
@@ -77,10 +82,12 @@
 					d'examen</h3>
 				<h:form>
 					<h:outputLabel value="Nombre de questions: " />
-					<h:inputText value="" />
+					<h:inputText value="#{nbrQuestion.nbr}" />
 
 					<h:commandButton value="Valider" styleClass="save"
-						action="#{matiereController.addMatiere(matiere, sessionScope.userid)}" />
+						action="#{paramController.addNbrQuestion(nbrQuestion)}" >
+						<f:param name="fk_matiere_id" value="#{sessionScope.matiere_id}" />
+					</h:commandButton>
 				</h:form>
 			</div>
 		</div>
