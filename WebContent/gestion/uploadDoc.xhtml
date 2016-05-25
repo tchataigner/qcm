@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
 
 <h:head>
 	<f:facet name="first">
@@ -37,25 +38,34 @@
 
 	<ui:include src="/header.xhtml" />
 	<!--  <ui:include src="/teacher_menu.xhtml" /> -->
+	<ui:include src="/header.xhtml" />
 	<div class="container">
-		<div class="row mySelect param">
+		<div class="row mySelect">
 			<div class="col-md-4 center-text">
-				<h:button value="Modifier les paramètres #{sessionScope.matiere_id}" outcome="/gestion/param_matiere.xhtml" />
-				<p class="description center-text">Vous pouvez modifier le système de notation, la contrainte de temps et le nombre de questions pour la simulation d'évaluation</p>
-			</div>
-			<div class="col-md-4 center-text">
-				<h:button value="Ajouter une question pour la matière #{sessionScope.matiere_id}" outcome="/question/list-question.xhtml" />
-				<h:button value="Modifier les catégories #{sessionScope.matiere_id}" outcome="/question/list-question.xhtml" />
-			</div>
-			<div class="col-md-4 center-text">
-				<h:button value="Gérer le cours #{sessionScope.matiere_id}" outcome="/gestion/uploadDoc.xhtml" />
+				<h3 class="center-text">upload-document</h3>
+
+
+				<h:form id="uploadForm" enctype="multipart/form-data">
+					<h:panelGrid columns="3">
+						<h:outputLabel for="file" value="Select file" />
+						<t:inputFileUpload id="file" value="#{myBean.uploadedFile}"
+							required="true" />
+						<h:message for="file" style="color: red;" />
+
+						<h:panelGroup />
+						<h:commandButton value="Submit" action="#{myBean.submit}" />
+						<h:message for="uploadForm" infoStyle="color: green;"
+							errorStyle="color: red;" />
+					</h:panelGrid>
+				</h:form>
 			</div>
 		</div>
 	</div>
 
-
-
-
+	<h:outputLink value="file/#{myBean.fileName}"
+		rendered="#{myBean.fileName != null}">
+                Download back
+            </h:outputLink>
 </h:body>
 </html>
 
