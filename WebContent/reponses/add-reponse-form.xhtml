@@ -47,51 +47,51 @@
 					<h:panelGrid columns="3">
 
 						<h:outputLabel>Text*:</h:outputLabel>
-						<h:inputText id="text0" required="true"
+						<h:inputText value='#{answerMap.text["1"]}' required="true"
 							requiredMessage="L'énnoncé de la réponse est obligatoire." />
 						<h:message for="text" />
 
 						<h:outputLabel>Vrai/Faux*:</h:outputLabel>
-						<h:selectOneRadio id="correct0">
+						<h:selectOneRadio value='#{answerMap.correct["1"]}'>
 							<f:selectItem itemValue="1" itemLabel="Vrai" />
 							<f:selectItem itemValue="0" itemLabel="Faux" />
 						</h:selectOneRadio>
 						<br />
 						<h:outputLabel>Text2*:</h:outputLabel>
-						<h:inputText required="true" id="text1"
+						<h:inputText required="true" value='#{answerMap.text["2"]}'
 							requiredMessage="L'énnoncé de la réponse est obligatoire." />
 						<h:message for="text" />
 
 						<h:outputLabel>Vrai/Faux*:</h:outputLabel>
-						<h:selectOneRadio id="correct1">
+						<h:selectOneRadio value='#{answerMap.correct["2"]}'>
 							<f:selectItem itemValue="1" itemLabel="Vrai" />
 							<f:selectItem itemValue="0" itemLabel="Faux" />
 						</h:selectOneRadio>
 						<br />
 						<h:outputLabel>Text3*:</h:outputLabel>
-						<h:inputText required="true" id="text2"
+						<h:inputText required="true" value='#{answerMap.text["3"]}'
 							requiredMessage="L'énnoncé de la réponse est obligatoire." />
 						<h:message for="text" />
-
+ 
 						<h:outputLabel>Vrai/Faux*:</h:outputLabel>
-						<h:selectOneRadio id="correct2">
+						<h:selectOneRadio value='#{answerMap.correct["3"]}'>
 							<f:selectItem itemValue="1" itemLabel="Vrai" />
 							<f:selectItem itemValue="0" itemLabel="Faux" />
 						</h:selectOneRadio>
 						<br />
 						<h:outputLabel>Text4*:</h:outputLabel>
-						<h:inputText required="true" id="text13"
+						<h:inputText required="true" value='#{answerMap.text["4"]}'
 							requiredMessage="L'énnoncé de la réponse est obligatoire." />
 						<h:message for="text" />
 
 						<h:outputLabel>Vrai/Faux*:</h:outputLabel>
-						<h:selectOneRadio id="correct3">
+						<h:selectOneRadio value='#{answerMap.correct["4"]}'>
 							<f:selectItem itemValue="1" itemLabel="Vrai" />
 							<f:selectItem itemValue="0" itemLabel="Faux" />
 						</h:selectOneRadio>
 						<br />
 						<h:commandButton value="Valider" styleClass="save"
-							action="#{answerController.addAnswer()}">
+							action="#{answerController.addAnswer(answerMap)}">
 							<f:param name="fk_question_id" value="#{question.id}" />
 						</h:commandButton>
 

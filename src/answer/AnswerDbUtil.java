@@ -84,7 +84,7 @@ public class AnswerDbUtil {
 		}
 	}
 	
-	public void addAnswer(Answer theAnswer) throws Exception {
+	public void addAnswer(String text, Integer correct, int fk_question_id) throws Exception {
 		Connection myConn = null;
 		PreparedStatement myStmt = null;
 		//System.out.println(theQuestion.getFk_matiere_id());
@@ -96,9 +96,9 @@ public class AnswerDbUtil {
 			myStmt = myConn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
 			// set params
-			myStmt.setString(1, theAnswer.getText());
-			myStmt.setInt(2, theAnswer.getCorrect());
-			myStmt.setInt(3, theAnswer.getFk_question_id());
+			myStmt.setString(1, text);
+			myStmt.setInt(2, correct);
+			myStmt.setInt(3, fk_question_id);
 
 			
 			myStmt.execute();	
