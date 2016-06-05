@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14640935966270" configfile="/qcm/WebContent/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="login.xhtml" x="122" y="178" id="pf14640937055871" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf14640937055882" path="/login.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="index.xhtml" x="338" y="178" id="pf14640937055883" referenceLink="//@navigationRule.1/@fromViewId|" outlinks="pf14640937055884" inlinks="pf14640937055882" path="/index.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="test/auto-evaluation.xhtml" x="554" y="178" id="pf14640937055885" referenceLink="//@navigationRule.1/@navigationCase.0/@toViewId|" inlinks="pf14640937055884" path="/test/auto-evaluation.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="accueil_test.xhtml" x="122" y="562" id="pf14640937055896" referenceLink="//@navigationRule.2/@fromViewId|" outlinks="pf14640937055897" path="/accueil_test.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="gestion/gestion_accueil.xhtml" x="338" y="562" id="pf14640937055898" referenceLink="//@navigationRule.3/@navigationCase.0/@toViewId|" inlinks="pf14640937055897 pf14640937055899" path="/gestion/gestion_accueil.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="gestion/uploadDoc.xhtml" id="pf146409370558910" referenceLink="//@navigationRule.3/@fromViewId|" outlinks="pf14640937055899" path="/gestion/uploadDoc.xhtml"/>
+  <links id="pf14640937055882" target="pf14640937055883" source="pf14640937055871" outcome="ok" redirect="true"/>
+  <links id="pf14640937055884" target="pf14640937055885" source="pf14640937055883" outcome="ok" redirect="true" fromaction="#{matiere.outcome}"/>
+  <links id="pf14640937055897" target="pf14640937055898" source="pf14640937055896" outcome="ok" redirect="true" fromaction="#{matiere.outcome}"/>
+  <links id="pf14640937055899" target="pf14640937055898" source="pf146409370558910" outcome="ok" redirect="true" fromaction="#{myBean.submit}"/>
+</pageflow:Pageflow>

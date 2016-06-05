@@ -24,18 +24,26 @@ import question.Question;
 public class EvaluationController {
 	private List<Answer> answers;
 	private List<Question> questions;
+	private List<Question> answeredquestions;
+	private List<Integer> correct_answers;
+	private List<Integer> wrong_answers;
 	private EvaluationDbUtil evaluationDbUtil;
 	private AnswerDbUtil answersDbUtil;
 	private Logger logger = Logger.getLogger(getClass().getName());
 
 	public EvaluationController() throws Exception {
 		questions = new ArrayList<>();
-
+		correct_answers = new ArrayList<>();
+		wrong_answers = new ArrayList<>();
 		evaluationDbUtil = EvaluationDbUtil.getInstance();
 	}
 
 	public List<Question> getQuestions() {
 		return questions;
+	}
+
+	public List<Question> getAnsweredquestions() {
+		return answeredquestions;
 	}
 
 	@PostConstruct
@@ -46,11 +54,25 @@ public class EvaluationController {
 		try {
 
 			FacesContext fc = FacesContext.getCurrentInstance();
-			Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
-			int matiereId = Integer.parseInt(params.get("id"));
+			int fk_matiere_id = Integer.parseInt(getMatiereIdParam(fc));
+			String[] sections = fc.getExternalContext().getRequestParameterValuesMap().get("j_idt19:sections");
 			// get all students from database
-			questions = evaluationDbUtil.getQuestions(matiereId);
-			System.out.println(questions.get(1).getAide());
+
+			System.out.println(sections);
+			if (sections == null) {
+				questions = evaluationDbUtil.getQuestions(fk_matiere_id);
+			} else {
+				for (String s : sections) {
+					int i = Integer.parseInt(s);
+					List<Question> inter = evaluationDbUtil.getQuestionsSectionId(i);
+					for (Question q : inter) {
+						questions.add(q);
+					}
+				}
+			}
+			for (Question q : questions) {
+				System.out.println(q.getId());
+			}
 		} catch (Exception exc) {
 			// send this to server logs
 			logger.log(Level.SEVERE, "Erreur lors du chargement des questions", exc);
@@ -84,57 +106,92 @@ public class EvaluationController {
 
 	public String correctEvaluation(Evaluation evaluation) {
 		try {
+			// Create total + the get the nbr of questions answered
 			float total = 0;
 			float nbr_question_answered = evaluation.getNbr();
+
+			answeredquestions = questions.subList(0, (int) nbr_question_answered);
+
+			// Create instances of the db to access info
 			evaluationDbUtil = EvaluationDbUtil.getInstance();
 			answersDbUtil = AnswerDbUtil.getInstance();
 
+			// Get the map of the evaluation
 			Map<Integer, String[]> eval = evaluation.getEval();
-			// System.out.println("Int : "+Arrays.toString(eval.get(80)));
+
+			// For each entry (a question) :
 			for (Entry<Integer, String[]> entry : eval.entrySet()) {
+
+				// We get all the answers
 				String[] strArray = (String[]) entry.getValue();
+
+				// Transform them in int value
 				int[] test = Arrays.asList(strArray).stream().mapToInt(Integer::parseInt).toArray();
+
 				List<Integer> answers = new ArrayList<Integer>();
+
+				// Transform the array of answers in a list of answers
 				for (int index = 0; index < test.length; index++) {
 					answers.add(test[index]);
 				}
+
+				// Get the id of the question (to get the correct answers later)
 				int question = entry.getKey();
 
-				if (!(answers.size() == 0)) {
+				// Get the answers of a question
+				List<Answer> correct_answers_list = answersDbUtil.getAnswers(question);
 
-					List<Answer> correct_answers_list = answersDbUtil.getAnswers(question);
-					List<Integer> correct_answer = new ArrayList<Integer>();
-					for (Answer a : correct_answers_list) {
-						if (a.getCorrect() == 1) {
-							correct_answer.add(a.getId());
+				List<Integer> correct_answer = new ArrayList<Integer>();
+				// For each answers we check if it is true or false
+				for (Answer a : correct_answers_list) {
+					if (a.getCorrect() == 1) {
+						// We add the good answer in the list to compare the
+						// student's answer list and the good answer's list
+						correct_answer.add(a.getId());
+
+						correct_answers.add(a.getId());
+					}
+				}
+
+				for (int a : answers) {
+					if (!(correct_answer.contains(a))) {
+						wrong_answers.add(a);
+					}
+				}
+
+				// We check if the size is the same (if not question is
+				// marked as wrong)
+				if (answers.size() == correct_answer.size()) {
+					int btw = 0;
+					/*
+					 * For each good answers we check if every one of them is in
+					 * the student's answer list if yes we inc btw of 1 if not
+					 * the question is wrong
+					 */
+					for (int a : correct_answer) {
+						if (answers.contains(a)) {
+							btw++;
 						}
 					}
-					System.out.println(question + " : " + answers.equals(correct_answer));
-
-					if (answers.size() == correct_answer.size()) {
-						int btw = 0;
-						for (int a : correct_answer) {
-							if (answers.contains(a)) {
-								btw++;
-							}
-						}
-						if (btw == correct_answer.size()) {
-							total++;
-						}
+					/*
+					 * If every thing is fine btw should be the size of
+					 * correct_answer So we add 1 too the total of right
+					 * questions
+					 */
+					if (btw == correct_answer.size()) {
+						total++;
 					}
-
-				} else {
-					System.out.println("null");
 				}
 
 			}
+			// Make the result in %
 			total = (total * 100) / nbr_question_answered;
-			System.out.println(total);
 
 			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-
+			// Put the result in request map
 			Map<String, Object> requestMap = externalContext.getRequestMap();
 			requestMap.put("total", total);
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -146,6 +203,37 @@ public class EvaluationController {
 	public void resetEvaluation() {
 
 		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("evaluationController");
+
+	}
+
+	public boolean correctAnswer(int answerid) {
+		if (correct_answers.contains(answerid)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public boolean wrongAnswer(int answerid) {
+		if (wrong_answers.contains(answerid)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public boolean notAnswer(int answerid) {
+		if (!(wrong_answers.contains(answerid)) && !(correct_answers.contains(answerid))) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public String getMatiereIdParam(FacesContext fc) {
+
+		Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
+		return params.get("fk_matiere_id");
 
 	}
 

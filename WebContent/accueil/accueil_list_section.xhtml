@@ -8,6 +8,35 @@
 
 
 <ui:composition>
-liste section + cour -- eleve
+<f:metadata>
+		<f:event type="preRenderView"
+			listener="#{sectionController.loadSection()}" />
+	</f:metadata>
+
+	<div id="container">
+		<h:panelGroup rendered="#{sessionScope.power >= 1}">
+
+			
+		</h:panelGroup>
+		<h:form>
+
+	
+				<ui:repeat value="#{sectionController.sections}" var="item">
+					<div class="row">
+						<div class="col-md-12 liste_mat" id="liste-link">
+							<h:commandLink styleClass="toggle">
+           					#{item.name}
+<!--            					<f:ajax execute="@form" render=":test1:submitButton :test2:deleteButton :test2:manageButton" /> -->
+    						<f:setPropertyActionListener target="#{section_id}" value="#{item.id}" />
+							</h:commandLink>
+						</div>
+					</div>
+				</ui:repeat>
+
+
+		</h:form>
+	</div>
+
+
 </ui:composition>
 </html>

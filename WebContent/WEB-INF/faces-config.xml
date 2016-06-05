@@ -31,6 +31,16 @@
 			<to-view-id>/gestion/gestion_accueil.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>/gestion/uploadDoc.xhtml</from-view-id>
+		<navigation-case>
+			<from-action>#{myBean.submit}</from-action>
+			<from-outcome>ok</from-outcome>
+			<to-view-id>/gestion/gestion_accueil.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
 	</navigation-rule>	
 
 </faces-config>

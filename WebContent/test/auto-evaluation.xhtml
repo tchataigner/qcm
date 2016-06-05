@@ -42,12 +42,14 @@
 
 id mat :
 	<h:outputText value="#{sessionScope.matiere_id}" />
+	<br/>
 
 items :
 	<h:form id="auto">
 	<div id="autoeval">
 			<section class="vertical-scrolling">
 		<c:forEach items="#{evaluationController.questions}" var="item">
+
 		
     		<div class="horizontal-scrolling">
 				<div class="row">
@@ -85,6 +87,7 @@ items :
 			action="#{evaluationController.correctEvaluation(evaluation)}"
 			styleClass="btn_style_stop center-block" />
 					</div>
+
 				</div>
 				
 		

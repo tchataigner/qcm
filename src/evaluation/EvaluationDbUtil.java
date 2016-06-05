@@ -89,6 +89,53 @@ public class EvaluationDbUtil {
 		}
 	}
 
+	public List<Question> getQuestionsSectionId(int sectionid) throws Exception {
+
+	List<Question> questions = new ArrayList<>();
+
+	Connection myConn = null;
+	PreparedStatement myStmt = null;
+	ResultSet myRs = null;
+
+	try {
+		myConn = getConnection();
+
+		String sql = "select * from question where (fk_section_id = ?) order by rand();";
+
+		myStmt = myConn.prepareStatement(sql);
+
+		// set params
+
+		myStmt.setInt(1, sectionid);
+
+		myStmt.execute();
+		myRs = myStmt.executeQuery();
+
+		// process result set
+		while (myRs.next()) {
+
+			// retrieve data from result set row
+			int id = myRs.getInt("id");
+			String text = myRs.getString("text");
+			String media = myRs.getString("media");
+			int difficulty = myRs.getInt("difficulty");
+			int fk_matiere_id = myRs.getInt("fk_matiere_id");
+			String commentaire = myRs.getString("commentaire");
+			String aide = myRs.getString("aide");
+
+			// create new student object
+			Question tempQuestion = new Question(id, text, media, difficulty, fk_matiere_id, commentaire, aide);
+
+			// add it to the list of students
+			questions.add(tempQuestion);
+		}
+
+		return questions;
+	} finally {
+		close(myConn, myStmt, myRs);
+	}
+}
+	
 	public List<Answer> getAnswers(int questionId) throws Exception {
 
 		List<Answer> answers = new ArrayList<>();
