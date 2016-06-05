@@ -57,6 +57,7 @@ public class EvaluationController {
 			int fk_matiere_id = Integer.parseInt(getMatiereIdParam(fc));
 			String[] sections = fc.getExternalContext().getRequestParameterValuesMap().get("j_idt19:sections");
 			// get all students from database
+
 			System.out.println(sections);
 			if (sections == null) {
 				questions = evaluationDbUtil.getQuestions(fk_matiere_id);

@@ -264,6 +264,46 @@ input[type="button"]:hover {
 	margin-bottom:2%;
 }
 
+/* page auto-evaluation */
+.question-slide{
+	background-color:white;
+	padding: 20px 20px 20px 20px;
+	border: solid #114785 1px;
+}
+
+.enonce-location{
+	margin:0;
+}
+
+.enonce{
+	border: solid #114785 3px;
+	padding: 5px 5px 5px 5px;
+}
+
+.enonce h3{
+	color:#EEA43F;
+}
+
+.reponses{
+	border: solid #114785 3px;
+	padding: 5px 5px 5px 5px;
+	margin-top:1%;
+}
+
+.btn_style_stop {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0px;
+  font-family: Arial;
+  color: #114785;
+  font-size: 20px;
+  background: white;
+  padding: 20px 30px 20px 30px;
+  margin-top: 20px;
+  border: solid #114785 2px;
+  text-decoration: none;
+}
+
 
 /* alter bootstrap */
 .navbar-inverse {
