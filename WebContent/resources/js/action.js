@@ -24,7 +24,10 @@ $(function(){
         controlArrows: true,
         // more options here
     });
+
+
   });
+
 $(document).ready(function(){
 	$('div.helptext').hide();
 	$('div.horizontal-scrolling #help').click(function(){
@@ -33,4 +36,16 @@ $(document).ready(function(){
 		console.log($(this).next());
 		console.log($(this).children().children());
 	});
+	var y = 1;
+	   $('div.fp-next').click(function () {
+	    	y = y + 1;
+	    	document.getElementById('auto:y').value = y;
+	    	});
+	   
+	   $('div.fp-prev').click(function () {
+	    	y = y - 1;
+	    	document.getElementById('auto:y').value = y;
+	    	});
+	
+
 });

@@ -40,11 +40,7 @@
 <ui:include src="/header.xhtml" />
 <h:body>
 
-id mat :
-	<h:outputText value="#{sessionScope.matiere_id}" />
-	<br/>
 
-items :
 	<h:form id="auto">
 	<div id="autoeval">
 			<section class="vertical-scrolling">
@@ -82,7 +78,6 @@ items :
 						 </div> 
 					</c:if>
 				<span id="#{item.id}"> </span>
-						
 						<h:commandButton value="envoyer"
 			action="#{evaluationController.correctEvaluation(evaluation)}"
 			styleClass="btn_style_stop center-block" />
