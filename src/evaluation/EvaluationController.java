@@ -50,7 +50,7 @@ public class EvaluationController {
 			int matiereId = Integer.parseInt(params.get("id"));
 			// get all students from database
 			questions = evaluationDbUtil.getQuestions(matiereId);
-
+			System.out.println(questions.get(1).getAide());
 		} catch (Exception exc) {
 			// send this to server logs
 			logger.log(Level.SEVERE, "Erreur lors du chargement des questions", exc);

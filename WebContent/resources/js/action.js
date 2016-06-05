@@ -17,5 +17,20 @@ $(function(){
       navigationPosition: 'right',
       navigationTooltips: ['Accueil', 'Notre But', 'Fonctionnalités', 'Interface', 'Contact']
     });
-
+    
+    $('#autoeval').fullpage({
+        sectionSelector: '.vertical-scrolling',
+        slideSelector: '.horizontal-scrolling',
+        controlArrows: true,
+        // more options here
+    });
   });
+$(document).ready(function(){
+	$('div.helptext').hide();
+	$('div.horizontal-scrolling #help').click(function(){
+		$(this).next().toggle();
+		//$(this).children().find('div.helptext').css("display" , "block");
+		console.log($(this).next());
+		console.log($(this).children().children());
+	});
+});

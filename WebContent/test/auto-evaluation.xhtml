@@ -9,27 +9,33 @@
 
 
 <h:head>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
-	<title>Update Student</title>
-
-	<h:outputStylesheet name="bootstrap/css/bootstrap.css" />
-
-	<h:outputStylesheet name="css/dashboard.css" />
-
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" />
-
-	<h:outputScript name="bootstrap/js/bootstrap.js" />
-
-	<h:outputStylesheet library="css" name="style.css" />
-
-	<h:outputStylesheet library="css" name="add-student-style.css" />
-	<h:outputScript target="body" name="js/app.js" />
-
-
-
+	
+	<f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+ 
+            <title>primestrap</title>
+        </f:facet>
+ 
+        <f:facet name="middle">
+            <h:outputStylesheet name="bootstrap/css/bootstrap.css" />
+            
+            <h:outputStylesheet name="css/style.css" />
+            <h:outputStylesheet name="css/fullpage.css" />
+			<h:outputScript target="body" name="js/jquery.js" /> 
+			<h:outputScript target="body" name="js/fullpage.js" />          
+            <h:outputScript name="bootstrap/js/bootstrap.js" />
+            <h:outputStylesheet library="css" name="add-student-style.css" />
+			<h:outputScript target="body" name="js/app.js" />
+            <h:outputScript target="body" name="js/action.js" />
+            
+        </f:facet>
+        
+        <f:facet name="last">
+ 
+        </f:facet>
+	
 </h:head>
 <ui:include src="/header.xhtml" />
 <h:body>
@@ -38,28 +44,62 @@ id mat :
 	<h:outputText value="#{sessionScope.matiere_id}" />
 
 items :
-<h:form id="auto">
+	<h:form id="auto">
+	<div id="autoeval">
+			<section class="vertical-scrolling">
 		<c:forEach items="#{evaluationController.questions}" var="item">
-			<div class="row">
-				<div class="col-md-12 liste_mat" id="liste-link">
-					Question : #{item.text} <span id="#{item.id}"> <h:selectManyCheckbox
-							id="question_#{item.id}" value="#{evaluation.eval[item.id]}">
-							<f:selectItems
-								value="#{evaluationController.loadAnswer(item.id)}"
-								var="answers" itemLabel="#{answers.text}"
-								itemValue="#{answers.id}" />
-						</h:selectManyCheckbox>
-
-					</span> Aide à la réponse : #{item.aide} <span id="#{item.id}"> </span>
-
-				</div>
-			</div>
-		</c:forEach>
-		<h:inputHidden id="y" value="#{evaluation.nbr}" />
-		<h:commandButton id="submitButton" value="envoyer"
+		
+    		<div class="horizontal-scrolling">
+				<div class="row">
+					<div class="col-md-10 col-md-offset-1 liste_mat question-slide" id="liste-link">
+					<div class="row enonce-location">
+						<div class="col-md-5 enonce">
+							<h3>Question :</h3> 
+							<p>#{item.text} </p>
+						</div>
+					</div>
+					<div class="row enonce-location">
+						<div class="col-md-12 reponses">
+							<span id="#{item.id}"> 
+							<h:selectManyCheckbox id="question_#{item.id}" value="#{evaluation.eval[item.id]}">
+						
+									<f:selectItems
+										value="#{evaluationController.loadAnswer(item.id)}"
+										var="answers" itemLabel="#{answers.text}"
+										itemValue="#{answers.id}" />
+										
+							</h:selectManyCheckbox>
+		
+							</span> 
+						</div>
+					</div>
+					<c:if test="${not empty item.aide}">
+						 <a href="#" id="help" >Aide</a>  
+						 <div id="dialog" title="Basic dialog" class="helptext" style="position: absolute;">
+						  	<p>#{item.aide}</p> 
+						 </div> 
+					</c:if>
+				<span id="#{item.id}"> </span>
+						
+						<h:commandButton value="envoyer"
 			action="#{evaluationController.correctEvaluation(evaluation)}"
-			styleClass="btn_style center-block" />
+			styleClass="btn_style_stop center-block" />
+					</div>
+				</div>
+				
+		
+			</div>
+		
+		</c:forEach>
+		
+			
+			</section>
+			<h:inputHidden id="y" value="#{evaluation.nbr}" />
+		</div>
 	</h:form>
+	
+       
+
 	<button id="next">test</button>
 
 </h:body>
