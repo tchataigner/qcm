@@ -1,7 +1,7 @@
 
-	var y = 0;
-   $("#next").click(function () {
+	/*var y = 0;
+   $("div .fp-controlArrow .fp-next").click(function () {
     	y = y + 1;
-    	console.log(y);
+    	alert("cool");
     	document.getElementById("auto:y").value = y;
-    	});
+    	});*/
