@@ -34,11 +34,14 @@ Pourcentage de réussite :
 	<h:outputText value="#{total}"/>%
 	
 	<c:forEach items="#{evaluationController.answeredquestions}" var="item">
+	<br/>
 	#{item.text}<br/>
 	<c:forEach items="#{evaluationController.loadAnswer(item.id)}" var="answer">
-	<h:outputText value="Wrong : #{answer.text}" rendered="#{evaluationController.wrongAnswer(answer.id)}" styleClass="wrong_answer"/>
-	<h:outputText value="Right : #{answer.text}" rendered="#{evaluationController.correctAnswer(answer.id)}" styleClass="correct_answer"/>
-	<h:outputText value="Not touched : #{answer.text}" rendered="#{evaluationController.notAnswer(answer.id)}" styleClass="correct_answer"/>
+	<h:outputText value="Wrong Answered : #{answer.text}" rendered="#{evaluationController.wrongAnswer(answer.id)}" styleClass="wrong answered"/>
+	<h:outputText value="Correct not answered : #{answer.text}" rendered="#{evaluationController.goodAnswer(answer.id)}" styleClass="correct"/>
+	<h:outputText value="Correct answered : #{answer.text}" rendered="#{evaluationController.correctAnswer(answer.id)}" styleClass="correct answered"/>
+	<h:outputText value="Wrong not answered : #{answer.text}" rendered="#{evaluationController.notAnswer(answer.id)}" styleClass="wrong"/>
+	<br/>
 	</c:forEach>
 	</c:forEach>
 </h:body>

@@ -25,6 +25,7 @@ public class EvaluationController {
 	private List<Answer> answers;
 	private List<Question> questions;
 	private List<Question> answeredquestions;
+	private List<Integer> good_answers;
 	private List<Integer> correct_answers;
 	private List<Integer> wrong_answers;
 	private EvaluationDbUtil evaluationDbUtil;
@@ -33,6 +34,7 @@ public class EvaluationController {
 
 	public EvaluationController() throws Exception {
 		questions = new ArrayList<>();
+		good_answers = new ArrayList<>();
 		correct_answers = new ArrayList<>();
 		wrong_answers = new ArrayList<>();
 		evaluationDbUtil = EvaluationDbUtil.getInstance();
@@ -149,7 +151,7 @@ public class EvaluationController {
 						// student's answer list and the good answer's list
 						correct_answer.add(a.getId());
 
-						correct_answers.add(a.getId());
+						good_answers.add(a.getId());
 					}
 				}
 
@@ -158,10 +160,16 @@ public class EvaluationController {
 						wrong_answers.add(a);
 					}
 				}
-
+				for (int a : correct_answer) {
+					if (answers.contains(a)) {
+						correct_answers.add(a);
+					}
+				}
+				
 				// We check if the size is the same (if not question is
 				// marked as wrong)
 				if (answers.size() == correct_answer.size()) {
+					System.out.println(correct_answer.isEmpty());
 					int btw = 0;
 					/*
 					 * For each good answers we check if every one of them is in
@@ -178,9 +186,12 @@ public class EvaluationController {
 					 * correct_answer So we add 1 too the total of right
 					 * questions
 					 */
-					if (btw == correct_answer.size()) {
+					if (btw == correct_answer.size() && btw != 0) {
+						System.out.println("inc total");
+
 						total++;
 					}
+
 				}
 
 			}
@@ -206,8 +217,16 @@ public class EvaluationController {
 
 	}
 
+	public boolean goodAnswer(int answerid) {
+		if (good_answers.contains(answerid) && !(correct_answers.contains(answerid))) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 	public boolean correctAnswer(int answerid) {
-		if (correct_answers.contains(answerid)) {
+		if (good_answers.contains(answerid) && correct_answers.contains(answerid)) {
 			return true;
 		} else {
 			return false;
@@ -215,15 +234,15 @@ public class EvaluationController {
 	}
 
 	public boolean wrongAnswer(int answerid) {
-		if (wrong_answers.contains(answerid)) {
+		if (wrong_answers.contains(answerid) && !(good_answers.contains(answerid))) {
 			return true;
 		} else {
 			return false;
 		}
 	}
-	
+
 	public boolean notAnswer(int answerid) {
-		if (!(wrong_answers.contains(answerid)) && !(correct_answers.contains(answerid))) {
+		if (!(wrong_answers.contains(answerid)) && !(good_answers.contains(answerid))) {
 			return true;
 		} else {
 			return false;
