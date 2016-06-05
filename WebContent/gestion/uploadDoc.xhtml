@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
+
+<h:head>
+	<f:facet name="first">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<title>primestrap</title>
+	</f:facet>
+
+	<f:facet name="middle">
+		<h:outputStylesheet name="bootstrap/css/bootstrap.css" />
+
+		<h:outputStylesheet name="css/style.css" />
+
+		<h:outputScript target="body" name="js/jquery.js" />
+
+		<h:outputScript name="bootstrap/js/bootstrap.js" />
+
+		<h:outputScript target="body" name="js/action.js" />
+
+	</f:facet>
+
+	<f:facet name="last">
+
+	</f:facet>
+
+</h:head>
+
+<h:body>
+
+	<ui:include src="/header.xhtml" />
+	<!--  <ui:include src="/teacher_menu.xhtml" /> -->
+	<ui:include src="/header.xhtml" />
+	<div class="container">
+		<div class="row mySelect">
+			<div class="col-md-4 center-text">
+				<h3 class="center-text">upload-document</h3>
+
+
+				<h:form id="uploadForm" enctype="multipart/form-data">
+					<h:panelGrid columns="3">
+						<h:outputLabel for="file" value="Select file" />
+						<t:inputFileUpload id="file" value="#{myBean.uploadedFile}"
+							required="true" />
+						<h:message for="file" style="color: red;" />
+
+						<h:panelGroup />
+						<h:commandButton value="Submit" action="#{myBean.submit}" />
+						<h:message for="uploadForm" infoStyle="color: green;"
+							errorStyle="color: red;" />
+					</h:panelGrid>
+				</h:form>
+			</div>
+		</div>
+	</div>
+
+	<h:outputLink value="file/#{myBean.fileName}"
+		rendered="#{myBean.fileName != null}">
+                Download back
+            </h:outputLink>
+</h:body>
+</html>
+

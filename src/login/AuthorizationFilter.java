@@ -36,10 +36,11 @@ public class AuthorizationFilter implements Filter {
             if (reqURI.indexOf("/login.xhtml") >= 0
                     || (ses != null && ses.getAttribute("username") != null)
                     || reqURI.indexOf("/public/") >= 0
-                    || reqURI.contains("javax.faces.resource"))
+                    || reqURI.contains("javax.faces.resource")
+                    || reqURI.contains("/fullpage.xhtml"))
                 chain.doFilter(request, response);
             else
-                resp.sendRedirect(reqt.getContextPath() + "/faces/login.xhtml");
+                resp.sendRedirect(reqt.getContextPath() + "/faces/fullpage.xhtml");
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

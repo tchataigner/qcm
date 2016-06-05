@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+ 
+    <h:head>
+        <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+ 
+            <title>primestrap</title>
+        </f:facet>
+ 
+        <f:facet name="middle">
+            <h:outputStylesheet name="bootstrap/css/bootstrap.css" />
+            
+            <h:outputStylesheet name="css/style.css" />
+            <h:outputStylesheet name="css/fullpage.css" />
+			<h:outputScript target="body" name="js/jquery.js" /> 
+			<h:outputScript target="body" name="js/fullpage.js" />          
+            <h:outputScript name="bootstrap/js/bootstrap.js" />
+            
+            <h:outputScript target="body" name="js/action.js" />
+            
+        </f:facet>
+        
+        <f:facet name="last">
+ 
+        </f:facet>
+ 
+    </h:head>
+              
+    <h:body>
+   	
+         
+        <div id="landing">
+  	<div class="container">
+
+	    <div class="section jungle" id="section1">
+	     	<div class="section-content">
+	     	<ui:include src="/header.xhtml" />
+	     		<div class="row">
+					<div class="col-md-12 transparent">
+						
+						
+					</div>
+				</div>
+	     	</div>
+	     </div>
+	     <div class="section jungle" id="section2">
+	     	<div class="section-content">
+	     		<div class="row">
+					<div class="col-md-12 transparent">
+						<h3>Notre But : </h3>
+						<p class="but">
+							Imaginez-vous professeur. Vous avez des centaines de copies à corriger, des dizaines d’heures de travail pour mettre au point une évaluation, aucun retour sur les acquis de vos élèves. Notre plateforme est la solution. Avec génération et correction automatique de QCM et des statistiques sur les performances de vos élèves votre travail sera simplifié.
+							Imaginez – vous élève. Vous voulez vérifier vos acquis, accéder au cours, maîtriser vos révisions ?  Vous avez du mal à apprendre ? Grâce à cette application vos révisions seront efficace et vos partiels ne vous auront jamais paru aussi simple.
+							Imaginez-vous Directeur. Notre plateforme Corail Training est adaptée aux exigences de votre école et simple d’utilisation à la différence des autres produits  présents sur le marché.	
+						</p>
+					</div>
+				</div>
+	     	</div>
+	     </div>
+	     <div class="section jungle" id="section3">
+	     	<div class="section-content">
+	     		<div class="row">
+					<div class="col-md-12 transparent">
+						<h3>Elèves, vous pouvez : </h3>
+							<ul class="fonctionnalites">
+							  <li>Générer des auto-évaluations</li>
+							  <li>Générer des QCM dans les conditions d'examen</li>
+							  <li>Accéder aux cours et TP</li>
+							</ul> 
+						<h3>Professeurs, vous pouvez : </h3>
+							<ul class="fonctionnalites">
+							  <li>Créer des QCM d'évaluation</li>
+							  <li>Gérer votre matière</li>
+							  <li>Vérifier les acquis de voes élèves avec des tests de connaissances</li>
+							</ul> 
+					</div>
+				</div>
+	     	</div>
+	     </div>
+	     <div class="section jungle" id="section4">
+	     	<div class="section-content">
+	     		<div class="row">
+					<div class="col-md-12 transparent">
+						<h3>Une interface facile d'utilisation</h3>
+						<div class="row">
+							<div class="col-md-4">
+								
+							</div>
+							<div class="col-md-4">
+								
+							</div>
+							<div class="col-md-4">
+							</div>
+						</div>
+
+					</div>
+				</div>
+	     	</div>
+	     </div>
+	     <div class="section jungle" id="section5">
+	     	<div class="section-content">
+	     		<div class="row">
+					<div class="col-md-12 transparent">
+						<h3>Contacter nous</h3>
+						<form action="/ma-page-de-traitement" method="post">
+						    <div>
+						        <label for="nom">Nom :</label>
+						        <input type="text" id="nom" />
+						    </div>
+						    <div>
+						        <label for="courriel">Courriel :</label>
+						        <input type="email" id="courriel" />
+						    </div>
+						    <div>
+						        <label for="message">Message :</label>
+						        <textarea id="message"></textarea>
+						    </div>
+						</form>
+					</div>
+				</div>
+	     	</div>
+	     </div>	     
+
+
+
+
+
+
+
+
+
+
+	</div>
+</div>
+         
+    </h:body>
+</html>
+ 
