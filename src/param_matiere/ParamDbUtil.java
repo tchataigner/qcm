@@ -47,8 +47,8 @@ public class ParamDbUtil {
 		try {
 			myConn = getConnection();
 
-			/*String sql = "update time_eval set hour = ?, min = ? where fk_matiere_id = ?";*/
-			String sql = "insert into time_eval (hour, min, fk_matiere_id) values (?,?,?)";
+			String sql = "update time_eval set hour = ?, min = ? where fk_matiere_id = ?";
+			//String sql = "insert into time_eval (hour, min, fk_matiere_id) values (?,?,?)";
 			myStmt = myConn.prepareStatement(sql);
 
 			// set params

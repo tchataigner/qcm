@@ -28,6 +28,7 @@
             <h:outputScript name="bootstrap/js/bootstrap.js" />
             <h:outputStylesheet library="css" name="add-student-style.css" />
             <h:outputScript target="body" name="js/action.js" />
+            <h:outputScript target="body" name="js/timer.js" />
             
         </f:facet>
         
@@ -38,12 +39,18 @@
 </h:head>
 <ui:include src="/header.xhtml" />
 <h:body>
-
+<h:inputHidden id="hour" value="#{hour}" />
+			<h:inputHidden id="min" value="#{min}" />
+			<p></p>
+			<p></p> 
+			<div id="timerText"></div>
 
 	<h:form id="auto" class="question-box">
 	<div id="autoeval">
 			<section class="vertical-scrolling">
-		<c:forEach items="#{evaluationController.questions}" var="item">
+			
+			
+		<c:forEach items="#{simController.questions}" var="item">
 
 		
     		<div class="horizontal-scrolling ">
@@ -58,10 +65,10 @@
 					<div class="row enonce-location">
 						<div class="col-md-12 reponses">
 							<span id="#{item.id}"> 
-							<h:selectManyCheckbox id="question_#{item.id}" value="#{evaluation.eval[item.id]}" layout="lineDirection">
+							<h:selectManyCheckbox id="question_#{item.id}" value="#{sim.eval[item.id]}" layout="lineDirection">
 						
 									<f:selectItems
-										value="#{evaluationController.loadAnswer(item.id)}"
+										value="#{simController.loadAnswer(item.id)}"
 										var="answers" itemLabel="#{answers.text}"
 										itemValue="#{answers.id}" />
 										
@@ -78,7 +85,7 @@
 					</c:if>
 				<span id="#{item.id}"> </span>
 						<h:commandButton value="envoyer"
-			action="#{evaluationController.correctEvaluation(evaluation)}"
+			action="#{simController.correctSim(sim)}"
 			styleClass="btn_style_stop center-block" />
 					</div>
 
@@ -91,7 +98,7 @@
 		
 			
 			</section>
-			<h:inputHidden id="y" value="#{evaluation.nbr}" />
+			<h:inputHidden id="y" value="#{sim.nbr}" />
 		</div>
 	</h:form>
 	

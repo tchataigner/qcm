@@ -1,4 +1,4 @@
-package evaluation;
+package sim;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,24 +13,25 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import answer.Answer;
+import param_matiere.Duration;
 import question.Question;
 
-public class EvaluationDbUtil {
-
-	private static EvaluationDbUtil instance;
+public class SimDbUtil {
+	
+	private static SimDbUtil instance;
 	private DataSource dataSource;
 	private String jndiName = "java:comp/env/jdbc/qcm";
 	private int correct;
-
-	public static EvaluationDbUtil getInstance() throws Exception {
+	
+	public static SimDbUtil getInstance() throws Exception {
 		if (instance == null) {
-			instance = new EvaluationDbUtil();
+			instance = new SimDbUtil();
 		}
 
 		return instance;
 	}
 
-	private EvaluationDbUtil() throws Exception {
+	private SimDbUtil() throws Exception {
 		dataSource = getDataSource();
 	}
 
@@ -42,7 +43,7 @@ public class EvaluationDbUtil {
 		return theDataSource;
 	}
 
-	public List<Question> getQuestions(int matiereid) throws Exception {
+	/*public List<Question> getQuestions(int matiereid) throws Exception {
 
 		List<Question> questions = new ArrayList<>();
 
@@ -53,7 +54,7 @@ public class EvaluationDbUtil {
 		try {
 			myConn = getConnection();
 
-			String sql = "select * from question where (fk_matiere_id = ?) and (fk_type_id = 1) order by rand();";
+			String sql = "select * from question where (fk_matiere_id = ?) order by rand();";
 
 			myStmt = myConn.prepareStatement(sql);
 
@@ -135,7 +136,7 @@ public class EvaluationDbUtil {
 		close(myConn, myStmt, myRs);
 	}
 }
-	
+	*/
 	public List<Answer> getAnswers(int questionId) throws Exception {
 
 		List<Answer> answers = new ArrayList<>();
@@ -214,7 +215,102 @@ public class EvaluationDbUtil {
 			return correct;
 		}
 	}
+	
+	public List<Question> getSimulation(int matiereid) throws Exception{
+		System.out.println("################################# TEST DbUtil "+ matiereid+" ###########################");
 
+		List<Question> questions = new ArrayList<>();
+
+		Connection myConn = null;
+		PreparedStatement myStmt = null;
+		ResultSet myRs = null;
+
+		try {
+			myConn = getConnection();
+
+			String sql = "select * from question where (fk_matiere_id = ?) and (fk_type_id = 1) order by rand();";
+
+			myStmt = myConn.prepareStatement(sql);
+
+			// set params
+
+			myStmt.setInt(1, matiereid);
+
+			myStmt.execute();
+			myRs = myStmt.executeQuery();
+
+			// process result set
+			while (myRs.next()) {
+
+				// retrieve data from result set row
+				int id = myRs.getInt("id");
+				String text = myRs.getString("text");
+				String media = myRs.getString("media");
+				int difficulty = myRs.getInt("difficulty");
+				int fk_matiere_id = myRs.getInt("fk_matiere_id");
+				String commentaire = myRs.getString("commentaire");
+				String aide = myRs.getString("aide");
+
+				// create new student object
+				Question tempQuestion = new Question(id, text, media, difficulty, fk_matiere_id, commentaire, aide);
+
+				// add it to the list of students
+				questions.add(tempQuestion);
+			}
+
+			return questions;
+		} finally {
+			close(myConn, myStmt, myRs);
+		}
+	}
+	
+	public List<Question> getSimulationSectionId(int sectionid) throws Exception {
+
+	List<Question> questions = new ArrayList<>();
+
+	Connection myConn = null;
+	PreparedStatement myStmt = null;
+	ResultSet myRs = null;
+
+	try {
+		myConn = getConnection();
+
+		String sql = "select * from question where (fk_section_id = ?) and (fk_type_id = 1) order by rand();";
+
+		myStmt = myConn.prepareStatement(sql);
+
+		// set params
+
+		myStmt.setInt(1, sectionid);
+
+		myStmt.execute();
+		myRs = myStmt.executeQuery();
+
+		// process result set
+		while (myRs.next()) {
+
+			// retrieve data from result set row
+			int id = myRs.getInt("id");
+			String text = myRs.getString("text");
+			String media = myRs.getString("media");
+			int difficulty = myRs.getInt("difficulty");
+			int fk_matiere_id = myRs.getInt("fk_matiere_id");
+			String commentaire = myRs.getString("commentaire");
+			String aide = myRs.getString("aide");
+
+			// create new student object
+			Question tempQuestion = new Question(id, text, media, difficulty, fk_matiere_id, commentaire, aide);
+
+			// add it to the list of students
+			questions.add(tempQuestion);
+		}
+
+		return questions;
+	} finally {
+		close(myConn, myStmt, myRs);
+	}
+}
+	
 	private Connection getConnection() throws Exception {
 
 		Connection theConn = dataSource.getConnection();

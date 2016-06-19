@@ -14,6 +14,12 @@
 			<f:param name="id" value="#{mat_id}" />
 		</h:commandButton>
 		<p class="description center-text">L'auto-évaluation vous permet de confirmer vos acquis et tester vos connaissances</p>
+	
+		<h:commandButton id="submitButton2" value="#{mat_id} - SIMULATION D'EXAMEN"
+			action="#{matiere.outcome('/test/prep_sim.xhtml')}" styleClass="btn_style center-block">
+			<f:param name="id" value="#{mat_id}" />
+		</h:commandButton>
+		<p class="description center-text">La simulation d'examen permet de tester vos connaissances dans les conditions d'un réel examen.</p>
 	</h:form>
 </ui:composition>
 </html>

@@ -17,32 +17,71 @@
             
      <h:outputStylesheet name="css/dashboard.css" />
             
-     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" />
-            
-    <h:outputScript name="bootstrap/js/bootstrap.js" />
-    
 	<h:outputStylesheet library="css" name="style.css"  />
 	
 	<h:outputStylesheet library="css" name="add-student-style.css"  />
+	
+	<h:outputStylesheet library="css" name="chart.css"  />
 	
 
 </h:head>
 <ui:include src="/header.xhtml" />
 <h:body>
+	<h:outputScript target="body" name="js/jquery.js" />     
+    <h:outputScript target="body" name="js/jquery.chart.js" />             
+    <h:outputScript name="bootstrap/js/bootstrap.js" />
+    <h:outputScript target="body" name="js/donut.js" />
 <br/><br/>
-Pourcentage de réussite :
-	<h:outputText value="#{total}"/>%
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3 centered">
+			<div>
+				<p class="text-correction" >Pourcentage de réussite :</p>
+				<div id="orangecircle" data-percent="#{total}" class="orange"></div>
+			</div>
+        </div>
+	</div>	
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+			<p class="description center-text">
+				Correction détaillée :
+				en vert les réponses correctes, 
+				en rouge les réponses incorrectes,
+				une bordure orange indique vos réponses.
+			</p>
+		</div>
+	</div>	
 	
 	<c:forEach items="#{evaluationController.answeredquestions}" var="item">
-	<br/>
-	#{item.text}<br/>
+	<div class="row">
+		<div class="col-md-10 col-md-offset-1 liste_mat question-slide" id="liste-link">
+			<div class="row enonce-location">
+				<div class="col-md-5 enonce">
+					<h3>Question :</h3> 
+					<p>#{item.text} </p>
+				</div>
+			</div>
+			<div class="row enonce-location">
+			<div class="col-md-12 reponses rep-correction">
 	<c:forEach items="#{evaluationController.loadAnswer(item.id)}" var="answer">
-	<h:outputText value="Wrong Answered : #{answer.text}" rendered="#{evaluationController.wrongAnswer(answer.id)}" styleClass="wrong answered"/>
-	<h:outputText value="Correct not answered : #{answer.text}" rendered="#{evaluationController.goodAnswer(answer.id)}" styleClass="correct"/>
-	<h:outputText value="Correct answered : #{answer.text}" rendered="#{evaluationController.correctAnswer(answer.id)}" styleClass="correct answered"/>
-	<h:outputText value="Wrong not answered : #{answer.text}" rendered="#{evaluationController.notAnswer(answer.id)}" styleClass="wrong"/>
+				<div class="col-md-3">
+				<h:outputText value="Wrong Answered : #{answer.text}" rendered="#{evaluationController.wrongAnswer(answer.id)}" styleClass="wrong answered"/>
+				
+				
+				<h:outputText value="Correct not answered : #{answer.text}" rendered="#{evaluationController.goodAnswer(answer.id)}" styleClass="correct"/>
+			
+				
+				<h:outputText value="Correct answered : #{answer.text}" rendered="#{evaluationController.correctAnswer(answer.id)}" styleClass="correct answered"/>
+			
+				<h:outputText value="Wrong not answered : #{answer.text}" rendered="#{evaluationController.notAnswer(answer.id)}" styleClass="wrong"/>
+				</div>
+	</c:forEach>
+			</div>
+		</div>
+		</div>
+	</div>
+	</c:forEach>
 	<br/>
-	</c:forEach>
-	</c:forEach>
+
 </h:body>
 </html>
+

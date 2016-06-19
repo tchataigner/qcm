@@ -25,7 +25,7 @@ $(function(){
         // more options here
     });
     
-    //$("[id$='circle']").percircle();
+    $("[id$='circle']").percircle();
 
   });
 

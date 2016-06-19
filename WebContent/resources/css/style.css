@@ -43,6 +43,9 @@ html,body{
 #container form#find input {border: 1px solid #ccc; border-radius: 3px; padding: 5px 10px; width: 86%;}
 #container #content {margin-top: 20px;}
 
+.navbar-fixed-top, .navbar-fixed-bottom{
+	position:absolute !important;
+}
 
 
 /*start shared*/
@@ -314,4 +317,64 @@ input[type="button"]:hover {
 	border:solid #114785 1px;
 	height:480px;
 	background-color:white;
+	margin-top: 3%;
+}
+
+/*correction*/
+.centered{
+	text-align:center;
+}
+
+.text-correction{
+	color: #114785;
+	font-size:24px;
+	font-weight:bold;
+}
+
+.percircle{
+	margin-left: 38% !important; 
+}
+
+.percircle.orange .bar, .percircle.orange .fill{
+	border-color: #EEA43F !important;
+}
+
+.percircle.orange:hover > span {
+	color: #EEA43F !important;
+}
+
+.correct{
+	color: #14A52D;
+}
+
+.wrong{
+	color: #F7273B;
+}
+
+.answered{
+	border:2px solid #EEA43F;
+	padding: 3%;
+}
+
+.rep-correction{
+	padding: 2% !important;
+}
+
+/*prep eval et éval*/
+
+html.fp-enabled, .fp-enabled body{
+	padding: 0px !important;
+	padding-top: 50px !important;
+}
+
+.question-box{
+	margin-top: -7%;
+}
+
+.choix-section{
+	padding:5%;
+}
+
+.pick-sections{
+	margin-left: 25%;
 }
