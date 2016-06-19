@@ -10,15 +10,15 @@
 <ui:composition>
 	<h:form id="test2">
 		<h:commandButton value="Gérer la matière #{mat_id}"
-			action="#{matiere.outcome('/gestion/gestion_accueil.xhtml')}" styleClass="btn_style center-block" id="manageButton">
+			action="#{matiere.outcome('/gestion/gestion_accueil.xhtml?faces-redirect=true')}" styleClass="btn_style center-block" id="manageButton">
 			<f:param name="id" value="#{mat_id}" />
 		</h:commandButton>
 		<h:commandButton value="Créer une évaluation"
 			action="#{matiereController.deleteMatiere()}" styleClass="btn_style center-block" >
 			<f:param name="id" value="#{mat_id}" />
 		</h:commandButton>
-		<h:commandButton value="Créer un test de connaissance"
-			action="#{matiereController.deleteMatiere()}" styleClass="btn_style center-block" >
+		<h:commandButton value="Gérer les tests de connaissance #{mat_id}"
+			action="#{matiere.outcome('/knowledge/list-knowledge.xhtml?faces-redirect=true')}" styleClass="btn_style center-block" id="knowledgeButton">
 			<f:param name="id" value="#{mat_id}" />
 		</h:commandButton>
 		<h:panelGroup rendered="#{sessionScope.power == 2 }">

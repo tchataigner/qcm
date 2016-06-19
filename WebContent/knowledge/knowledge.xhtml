@@ -6,6 +6,10 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 
+<f:metadata>
+	<f:event type="preRenderView" listener="#{knowledgeController.loadQuestions()}" />
+</f:metadata>
+
 <h:head>
 
 	<f:facet name="first">
@@ -41,7 +45,7 @@
 	<h:form id="auto">
 		<div id="autoeval">
 			<section class="vertical-scrolling">
-				<c:forEach items="#{evaluationController.questions}" var="item">
+				<c:forEach items="#{knowledgeController.questions}" var="item">
 
 
 					<div class="horizontal-scrolling">
@@ -78,7 +82,7 @@
 								</c:if>
 								<span id="#{item.id}"> </span>
 								<h:commandButton value="envoyer"
-									action="#{evaluationController.correctEvaluation(evaluation)}"
+									action="#{knowledgeController.updateKnowledge(evaluation)}"
 									styleClass="btn_style_stop center-block" />
 							</div>
 
@@ -98,6 +102,7 @@
 
 
 	<button id="next">test</button>
+
 
 </h:body>
 </html>

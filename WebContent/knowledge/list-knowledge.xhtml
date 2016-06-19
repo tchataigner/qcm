@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<f:metadata>
+	<f:event type="preRenderView"
+		listener="#{knowledgeController.loadKnowledge(sessionScope.matiere_id)}" />
+</f:metadata>
+
+<h:head>
+	<f:facet name="first">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<title>Questions</title>
+	</f:facet>
+
+	<f:facet name="middle">
+		<h:outputStylesheet name="bootstrap/css/bootstrap.css" />
+
+		<h:outputStylesheet name="css/style.css" />
+
+		<h:outputScript target="body" name="js/jquery.js" />
+
+		<h:outputScript name="bootstrap/js/bootstrap.js" />
+
+		<h:outputScript target="body" name="js/action.js" />
+
+	</f:facet>
+
+
+</h:head>
+
+<h:body>
+	<ui:include src="/header.xhtml" />
+
+
+
+	<div class="container list-question">
+
+		<div id="content">
+			<h3>Tests de connaissances</h3>
+
+			<h:messages globalOnly="true" />
+
+			<h:button value="Ajouter" styleClass="btn_style"
+				outcome="add-knowledge-form" />
+
+			<h:form>
+
+				<h:dataTable value="#{knowledgeController.knowledge}" var="item"
+					styleClass="demo-table" headerClass="demo-table-header"
+					rowClasses="demo-table-odd-row,demo-table-even-row">
+
+					<h:column>
+						<!-- the column header -->
+						<f:facet name="header">Name</f:facet>
+
+						<!--  the value for each row -->
+					#{item.name}
+				</h:column>
+
+					<h:column>
+						<!-- the column header -->
+						<f:facet name="header">Commencer un test</f:facet>
+
+						<!--  the value for each row -->
+
+						<h:commandButton value="Commencer le test #{item.name}"
+							action="#{knowledgeController.startKnowledge()}"
+							styleClass="btn_style center-block" id="startButton">
+							<f:param name="id" value="#{item.id}" />
+						</h:commandButton>
+					</h:column>
+
+					<h:column>
+						<!-- the column header -->
+						<f:facet name="header">Commencer un test</f:facet>
+
+						<!--  the value for each row -->
+
+						<h:commandButton value="Arrêter le test #{item.name}"
+							action="#{knowledgeController.stopKnowledge(item)}"
+							styleClass="btn_style center-block" id="stopButton">
+						</h:commandButton>
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">
+							<!-- the column header -->Supprimer un test</f:facet>
+
+						<!--  the value for each row -->
+
+						<h:commandButton value="Supprimer le test #{item.name}"
+							action="#{knowledgeController.deleteKnowledge()}"
+							styleClass="btn_style center-block" id="deleteButton">
+							<f:param name="id" value="#{item.id}" />
+						</h:commandButton>
+					</h:column>
+
+
+				</h:dataTable>
+
+			</h:form>
+
+		</div>
+
+	</div>
+
+</h:body>
+</html>

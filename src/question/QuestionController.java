@@ -68,6 +68,27 @@ public class QuestionController {
 		}
 		return "/reponses/add-reponse-form";
 	}
+	
+	public String deleteQuestion() {
+		FacesContext fc = FacesContext.getCurrentInstance();
+		Map<String,String> params = fc.getExternalContext().getRequestParameterMap();
+		int questionId = Integer.parseInt(params.get("id"));
+		try {
+			
+			questionDbUtil.deleteQuestion(questionId);
+
+		} catch (Exception exc) {
+			// send this to server logs
+			logger.log(Level.SEVERE, "Error loading student id:" + questionId, exc);
+
+			// add error message for JSF page
+			addErrorMessage(exc);
+
+			return null;
+		}
+
+		return "/question/list-question.xhtml";
+	}
 
 	private void addErrorMessage(Exception exc) {
 		FacesMessage message = new FacesMessage("Error: " + exc.getMessage());

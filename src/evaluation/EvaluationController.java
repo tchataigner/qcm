@@ -41,39 +41,41 @@ public class EvaluationController {
 	}
 
 	public List<Question> getQuestions() {
+		System.out.println(questions.size());
 		return questions;
+		
 	}
 
 	public List<Question> getAnsweredquestions() {
 		return answeredquestions;
 	}
 
-	@PostConstruct
-	public void loadEvaluation() {
+	public String loadEvaluation() {
 
 		logger.info("Chargement des questions");
 
 		try {
+			if (questions.isEmpty()) {
+				FacesContext fc = FacesContext.getCurrentInstance();
+				int fk_matiere_id = Integer.parseInt(getMatiereIdParam(fc));
+				String[] sections = fc.getExternalContext().getRequestParameterValuesMap().get("j_idt19:sections");
+				// get all students from database
 
-			FacesContext fc = FacesContext.getCurrentInstance();
-			int fk_matiere_id = Integer.parseInt(getMatiereIdParam(fc));
-			String[] sections = fc.getExternalContext().getRequestParameterValuesMap().get("j_idt19:sections");
-			// get all students from database
-
-			System.out.println(sections);
-			if (sections == null) {
-				questions = evaluationDbUtil.getQuestions(fk_matiere_id);
-			} else {
-				for (String s : sections) {
-					int i = Integer.parseInt(s);
-					List<Question> inter = evaluationDbUtil.getQuestionsSectionId(i);
-					for (Question q : inter) {
-						questions.add(q);
+				System.out.println(sections);
+				if (sections == null) {
+					questions = evaluationDbUtil.getQuestions(fk_matiere_id);
+				} else {
+					for (String s : sections) {
+						int i = Integer.parseInt(s);
+						List<Question> inter = evaluationDbUtil.getQuestionsSectionId(i);
+						for (Question q : inter) {
+							questions.add(q);
+						}
 					}
 				}
-			}
-			for (Question q : questions) {
-				System.out.println(q.getId());
+				for (Question q : questions) {
+					System.out.println(q.getId());
+				}
 			}
 		} catch (Exception exc) {
 			// send this to server logs
@@ -82,6 +84,7 @@ public class EvaluationController {
 			// add error message for JSF page
 			addErrorMessage(exc);
 		}
+		return "/test/auto-evaluation.xhtml?faces-redirect=true";
 	}
 
 	public List<Answer> loadAnswer(int questionId) {
@@ -165,7 +168,7 @@ public class EvaluationController {
 						correct_answers.add(a);
 					}
 				}
-				
+
 				// We check if the size is the same (if not question is
 				// marked as wrong)
 				if (answers.size() == correct_answer.size()) {
@@ -208,7 +211,7 @@ public class EvaluationController {
 			e.printStackTrace();
 		}
 
-		return "/test/auto_evaluation_correction.xhtml";
+		return "/test/auto_evaluation_correction.xhtml?faces-redirect=true";
 	}
 
 	public void resetEvaluation() {
@@ -224,7 +227,7 @@ public class EvaluationController {
 			return false;
 		}
 	}
-	
+
 	public boolean correctAnswer(int answerid) {
 		if (good_answers.contains(answerid) && correct_answers.contains(answerid)) {
 			return true;

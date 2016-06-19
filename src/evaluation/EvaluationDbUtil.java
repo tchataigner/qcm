@@ -53,7 +53,7 @@ public class EvaluationDbUtil {
 		try {
 			myConn = getConnection();
 
-			String sql = "select * from question where (fk_matiere_id = ?) order by rand();";
+			String sql = "select * from question where (fk_matiere_id = ?) and (fk_type_id = 1) order by rand();";
 
 			myStmt = myConn.prepareStatement(sql);
 

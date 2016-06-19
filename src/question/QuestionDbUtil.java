@@ -19,27 +19,27 @@ public class QuestionDbUtil {
 	private static QuestionDbUtil instance;
 	private DataSource dataSource;
 	private String jndiName = "java:comp/env/jdbc/qcm";
-	
+
 	public static QuestionDbUtil getInstance() throws Exception {
 		if (instance == null) {
 			instance = new QuestionDbUtil();
 		}
-		
+
 		return instance;
 	}
-	
-	private QuestionDbUtil() throws Exception {		
+
+	private QuestionDbUtil() throws Exception {
 		dataSource = getDataSource();
 	}
 
 	private DataSource getDataSource() throws NamingException {
 		Context context = new InitialContext();
-		
+
 		DataSource theDataSource = (DataSource) context.lookup(jndiName);
-		
+
 		return theDataSource;
 	}
-		
+
 	public List<Question> getQuestions(int matiereid) throws Exception {
 
 		List<Question> questions = new ArrayList<>();
@@ -47,7 +47,7 @@ public class QuestionDbUtil {
 		Connection myConn = null;
 		PreparedStatement myStmt = null;
 		ResultSet myRs = null;
-		
+
 		try {
 			myConn = getConnection();
 
@@ -58,13 +58,13 @@ public class QuestionDbUtil {
 			// set params
 
 			myStmt.setInt(1, matiereid);
-			
+
 			myStmt.execute();
 			myRs = myStmt.executeQuery();
 
 			// process result set
 			while (myRs.next()) {
-				
+
 				// retrieve data from result set row
 				int id = myRs.getInt("id");
 				String text = myRs.getString("text");
@@ -80,20 +80,19 @@ public class QuestionDbUtil {
 				// add it to the list of students
 				questions.add(tempQuestion);
 			}
-			
-			return questions;		
-		}
-		finally {
-			close (myConn, myStmt, myRs);
+
+			return questions;
+		} finally {
+			close(myConn, myStmt, myRs);
 		}
 	}
-	
+
 	public void addQuestion(Question theQuestion) throws Exception {
 		System.out.println("toto1");
 
 		Connection myConn = null;
 		PreparedStatement myStmt = null;
-		//System.out.println(theQuestion.getFk_matiere_id());
+		// System.out.println(theQuestion.getFk_matiere_id());
 		try {
 			myConn = getConnection();
 
@@ -109,8 +108,8 @@ public class QuestionDbUtil {
 			myStmt.setInt(5, theQuestion.getFk_type_id());
 			myStmt.setString(6, theQuestion.getCommentaire());
 			myStmt.setString(7, theQuestion.getAide());
-			
-			myStmt.execute();	
+
+			myStmt.execute();
 
 			ResultSet generatedKeys = myStmt.getGeneratedKeys();
 
@@ -118,24 +117,44 @@ public class QuestionDbUtil {
 				System.out.println(generatedKeys.getInt(1));
 				theQuestion.setId(generatedKeys.getInt(1));
 			}
+		} finally {
+			close(myConn, myStmt);
 		}
-		finally {
-			close (myConn, myStmt);
-		}
-		
+
 	}
-	
+
+	public void deleteQuestion(int questionId) throws Exception {
+
+		Connection myConn = null;
+		PreparedStatement myStmt = null;
+
+		try {
+			myConn = getConnection();
+
+			String sql = "delete from question where id = ? ";
+
+			myStmt = myConn.prepareStatement(sql);
+
+			// set params
+			myStmt.setInt(1, questionId);
+
+			myStmt.execute();
+		} finally {
+			close(myConn, myStmt);
+		}
+	}
+
 	private Connection getConnection() throws Exception {
 
 		Connection theConn = dataSource.getConnection();
-		
+
 		return theConn;
 	}
-	
+
 	private void close(Connection theConn, Statement theStmt) {
 		close(theConn, theStmt, null);
 	}
-	
+
 	private void close(Connection theConn, Statement theStmt, ResultSet theRs) {
 
 		try {
@@ -150,9 +169,9 @@ public class QuestionDbUtil {
 			if (theConn != null) {
 				theConn.close();
 			}
-			
+
 		} catch (Exception exc) {
 			exc.printStackTrace();
 		}
-	}	
+	}
 }
