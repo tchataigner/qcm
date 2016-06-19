@@ -13,6 +13,8 @@
 			listener="#{matiereController.loadMatieres()}" />
 		<f:event type="preRenderView"
 			listener="#{evaluationController.resetEvaluation()}" />
+		<f:event type="preRenderView"
+			listener="#{simController.resetSim()}" />
 	</f:metadata>
 
 	<div id="container">
@@ -29,7 +31,8 @@
 						<div class="col-md-12 liste_mat" id="liste-link">
 							<h:commandLink styleClass="toggle" id="matiere">
            					#{item.name}
-           					<f:ajax execute="@form" render=":test1:submitButton :test2:deleteButton :test2:manageButton :test2:knowledgeButton" />
+           					<f:ajax execute="@form" render=":test1:submitButton :test1:submitButton2 :test2:deleteButton :test2:manageButton :test2:knowledgeButton" />
+
     						<f:setPropertyActionListener target="#{mat_id}" value="#{item.id}" />
 							</h:commandLink>
 						</div>
@@ -38,6 +41,7 @@
 
 
 		</h:form>
+		
 	</div>
 
 

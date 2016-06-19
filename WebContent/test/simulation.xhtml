@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+
+
+<h:head>
+	
+	<f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+ 
+            <title>primestrap</title>
+        </f:facet>
+ 
+        <f:facet name="middle">
+            <h:outputStylesheet name="bootstrap/css/bootstrap.css" />
+            
+            <h:outputStylesheet name="css/style.css" />
+            <h:outputStylesheet name="css/fullpage.css" />
+			<h:outputScript target="body" name="js/jquery.js" /> 
+			<h:outputScript target="body" name="js/fullpage.js" />          
+            <h:outputScript name="bootstrap/js/bootstrap.js" />
+            <h:outputStylesheet library="css" name="add-student-style.css" />
+            <h:outputScript target="body" name="js/action.js" />
+            <h:outputScript target="body" name="js/timer.js" />
+            
+        </f:facet>
+        
+        <f:facet name="last">
+ 
+        </f:facet>
+	
+</h:head>
+<ui:include src="/header.xhtml" />
+<h:body>
+<h:inputHidden id="hour" value="#{hour}" />
+			<h:inputHidden id="min" value="#{min}" />
+			<p></p>
+			<p></p> 
+			<div id="timerText"></div>
+
+	<h:form id="auto" class="question-box">
+	<div id="autoeval">
+			<section class="vertical-scrolling">
+			
+			
+		<c:forEach items="#{simController.questions}" var="item">
+
+		
+    		<div class="horizontal-scrolling ">
+				<div class="row ">
+					<div class="col-md-10 col-md-offset-1 question-slide" id="liste-link">
+					<div class="row enonce-location">
+						<div class="col-md-5 enonce">
+							<h3>Question :</h3> 
+							<p>#{item.text} </p>
+						</div>
+					</div>
+					<div class="row enonce-location">
+						<div class="col-md-12 reponses">
+							<span id="#{item.id}"> 
+							<h:selectManyCheckbox id="question_#{item.id}" value="#{sim.eval[item.id]}" layout="lineDirection">
+						
+									<f:selectItems
+										value="#{simController.loadAnswer(item.id)}"
+										var="answers" itemLabel="#{answers.text}"
+										itemValue="#{answers.id}" />
+										
+							</h:selectManyCheckbox>
+		
+							</span> 
+						</div>
+					</div>
+					<c:if test="${not empty item.aide}">
+						 <a href="#" id="help" >Aide</a>  
+						 <div id="dialog" title="Basic dialog" class="helptext" style="position: absolute;">
+						  	<p>#{item.aide}</p> 
+						 </div> 
+					</c:if>
+				<span id="#{item.id}"> </span>
+						<h:commandButton value="envoyer"
+			action="#{simController.correctSim(sim)}"
+			styleClass="btn_style_stop center-block" />
+					</div>
+
+				</div>
+				
+		
+			</div>
+		
+		</c:forEach>
+		
+			
+			</section>
+			<h:inputHidden id="y" value="#{sim.nbr}" />
+		</div>
+	</h:form>
+	
+       
+
+	<button id="next">test</button>
+
+</h:body>
+</html>

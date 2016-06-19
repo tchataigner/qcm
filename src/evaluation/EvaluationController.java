@@ -112,8 +112,8 @@ public class EvaluationController {
 	public String correctEvaluation(Evaluation evaluation) {
 		try {
 			// Create total + the get the nbr of questions answered
-			float total = 0;
-			float nbr_question_answered = evaluation.getNbr();
+			int total = 0;
+			int nbr_question_answered = evaluation.getNbr();
 
 			answeredquestions = questions.subList(0, (int) nbr_question_answered);
 
@@ -213,7 +213,7 @@ public class EvaluationController {
 
 		return "/test/auto_evaluation_correction.xhtml?faces-redirect=true";
 	}
-
+	
 	public void resetEvaluation() {
 
 		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("evaluationController");

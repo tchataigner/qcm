@@ -90,6 +90,6 @@ public class Login implements Serializable {
     public String logout() {
         HttpSession session = SessionBean.getSession();
         session.invalidate();
-        return "login";
+        return "/login.xhtml?faces-redirect=true";
     }
 }

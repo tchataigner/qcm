@@ -1,0 +1,6 @@
+
+	$(function(){ 
+            $("[id$='circle']").percircle();
+            
+       
+        });
