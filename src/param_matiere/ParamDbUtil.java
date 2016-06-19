@@ -37,6 +37,79 @@ public class ParamDbUtil {
 		return theDataSource;
 	}
 	
+	/*init params*/
+	
+	public void initTime(int matiereId) throws Exception {
+
+		Connection myConn = null;
+		PreparedStatement myStmt = null;
+
+		try {
+			myConn = getConnection();
+
+			String sql = "insert into time_eval set fk_matiere_id = ?;";
+			//String sql = "insert into time_eval (hour, min, fk_matiere_id) values (?,?,?)";
+			myStmt = myConn.prepareStatement(sql);
+
+			// set params
+			myStmt.setInt(1, matiereId);
+			myStmt.execute();
+			
+			
+		}
+		finally {
+			close (myConn, myStmt);
+		}
+		
+	}
+	
+	public void initNotation(int matiereId) throws Exception {
+
+		Connection myConn = null;
+		PreparedStatement myStmt = null;
+
+		try {
+			myConn = getConnection();
+
+			String sql = "insert into notation set fk_matiere_id = ?;";
+			//String sql = "insert into time_eval (hour, min, fk_matiere_id) values (?,?,?)";
+			myStmt = myConn.prepareStatement(sql);
+
+			// set params
+			myStmt.setInt(1, matiereId);
+			myStmt.execute();
+			
+			
+		}
+		finally {
+			close (myConn, myStmt);
+		}
+		
+	}
+	
+	public void initNbr(int matiereId) throws Exception {
+
+		Connection myConn = null;
+		PreparedStatement myStmt = null;
+
+		try {
+			myConn = getConnection();
+
+			String sql = "insert into nbr_question set fk_matiere_id = ?;";
+			//String sql = "insert into time_eval (hour, min, fk_matiere_id) values (?,?,?)";
+			myStmt = myConn.prepareStatement(sql);
+
+			// set params
+			myStmt.setInt(1, matiereId);
+			myStmt.execute();
+			
+			
+		}
+		finally {
+			close (myConn, myStmt);
+		}
+		
+	}
 	/*add duration*/
 	
 	public void addParamDuration(Duration theDuration) throws Exception {
@@ -74,11 +147,10 @@ public class ParamDbUtil {
 			myConn = getConnection();
 
 			/*String sql = "update nbr_question set nbr = ? where fk_matiere_id = ?";*/
-			String sql = "insert into nbr_question (nbr, fk_matiere_id) values (?,?)";
+			String sql = "update nbr_question set nbr = ? where fk_matiere_id = ? ";
 			
 			myStmt = myConn.prepareStatement(sql);
-			System.out.println(theNbrQuestion.getNbr());
-			System.out.println(theNbrQuestion.getFk_matiere_id());
+
 			// set params
 			myStmt.setInt(1, theNbrQuestion.getNbr());
 			myStmt.setInt(2, theNbrQuestion.getFk_matiere_id());
@@ -100,8 +172,8 @@ public class ParamDbUtil {
 		try {
 			myConn = getConnection();
 
-			/*String sql = "update notation set correct_value = ?, incorrect_value = ?, noanswer_value = ? where fk_matiere_id = ?";*/
-			String sql = "insert into notation (correct_value, incorrect_value, noanswer_value, fk_matiere_id) values (?,?,?,?)";
+			String sql = "update notation set correct_value = ?, incorrect_value = ?, noanswer_value = ? where fk_matiere_id = ?";
+			//String sql = "insert into notation (correct_value, incorrect_value, noanswer_value, fk_matiere_id) values (?,?,?,?)";
 			myStmt = myConn.prepareStatement(sql);
 
 			// set params

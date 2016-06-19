@@ -84,7 +84,7 @@ public class EvaluationController {
 			// add error message for JSF page
 			addErrorMessage(exc);
 		}
-		return "/test/auto-evaluation.xhtml?faces-redirect=true";
+		return "/test/auto-evaluation.xhtml";
 	}
 
 	public List<Answer> loadAnswer(int questionId) {
@@ -206,12 +206,13 @@ public class EvaluationController {
 			Map<String, Object> requestMap = externalContext.getRequestMap();
 			requestMap.put("total", total);
 
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		return "/test/auto_evaluation_correction.xhtml?faces-redirect=true";
+		return "/test/auto_evaluation_correction.xhtml";
 	}
 	
 	public void resetEvaluation() {

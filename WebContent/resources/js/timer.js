@@ -1,16 +1,16 @@
-//var paramhours = $('#hour').attr('value');
-//var parammins = $('#min').attr('value');
+var paramhours = $('#hour').attr('value');
+var parammins = $('#min').attr('value');
 
  //alert(paramhours);
  //alert(parammins);
  
  
  //modify
- //var mins =  parammins;
- //var hours = paramhours;
+ var mins =  parammins;
+ var hours = paramhours;
 
-var mins = 1;
-var hours = 0;
+//var mins = 1;
+//var hours = 0;
 
 //Set the number of minutes you need
     var secs = mins * 60 + hours * 3600;

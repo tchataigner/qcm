@@ -56,8 +56,7 @@ public class SimController {
 		return answeredquestions;
 	}
 
-	@PostConstruct
-	public void loadSimulation() {
+	public String loadSimulation() {
 
 		logger.info("Chargement des questions");
 		List<Question> temp_questions = new ArrayList<>();
@@ -108,6 +107,7 @@ public class SimController {
 			// add error message for JSF page
 			addErrorMessage(exc);
 		}
+		return "/test/simulation.xhtml?faces-redirect=true";
 	}
 
 	public List<Answer> loadAnswer(int questionId) {
@@ -231,6 +231,8 @@ public class SimController {
 			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 			Map<String, Object> requestMap = externalContext.getRequestMap();
 			requestMap.put("total", total);
+			requestMap.put("total2", 5);
+			requestMap.put("questions", questions);
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

@@ -45,7 +45,7 @@
 		<div id="content">
 			<h:form>
 			<div class="col-md-10 col-md-offset-1 choix-section">
-				<h:selectManyCheckbox id="sections" class="pick-sections" value="#{simulation.section}" layout="pageDirection">
+				<h:selectManyCheckbox id="sections" class="pick-sections" value="#{sim.section}" layout="pageDirection">
 					<f:selectItems value="#{sectionController.loadSection(sessionScope.matiere_id)}"
 						var="section" itemLabel="#{section.name}"
 						itemValue="#{section.id}" />			
@@ -54,7 +54,7 @@
 
 				<h:commandButton id="submitButton"
 					value="#{sessionScope.matiere_id} - SIMULATION D'EXAMEN"
-					action="/test/simulation.xhtml"
+					action="#{simController.loadSimulation()}"
 					styleClass="btn_style center-block">
 					<f:param name="fk_matiere_id" value="#{sessionScope.matiere_id}" />
 

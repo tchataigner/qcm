@@ -11,6 +11,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
+import param_matiere.ParamDbUtil;
+
 
 @ManagedBean
 @SessionScoped
@@ -18,11 +20,12 @@ public class MatiereController {
 
 	private List<Matiere> matieres;
 	private MatiereDbUtil matiereDbUtil;
+	private ParamDbUtil paramDbUtil;
 	private Logger logger = Logger.getLogger(getClass().getName());
 
 	public MatiereController() throws Exception {
 		matieres = new ArrayList<>();
-
+		paramDbUtil = ParamDbUtil.getInstance();
 		matiereDbUtil = MatiereDbUtil.getInstance();
 	}
 
@@ -54,6 +57,9 @@ public class MatiereController {
 		logger.info("Adding matiere: " + theMatiere);
 		try {
 			matiereDbUtil.addMatiere(theMatiere, fk_user_id);
+			paramDbUtil.initNotation(theMatiere.getId());
+			paramDbUtil.initTime(theMatiere.getId());
+			paramDbUtil.initNbr(theMatiere.getId());
 		} catch (Exception exc) {
 			logger.log(Level.SEVERE, "Error adding matiere", exc);
 			addErrorMessage(exc);

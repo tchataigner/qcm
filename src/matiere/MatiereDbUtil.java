@@ -88,13 +88,20 @@ public class MatiereDbUtil {
 
 			String sql = "insert into matiere (name, fk_user_id) values (?,?)";
 
-			myStmt = myConn.prepareStatement(sql);
+			myStmt = myConn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
 			// set params
 			myStmt.setString(1, theMatiere.getName());
 			myStmt.setInt(2, fk_user_id);
 			
-			myStmt.execute();			
+			myStmt.execute();
+			
+			ResultSet generatedKeys = myStmt.getGeneratedKeys();
+
+			if (generatedKeys.next()) {
+				System.out.println(generatedKeys.getInt(1));
+				theMatiere.setId(generatedKeys.getInt(1));
+			}
 		}
 		finally {
 			close (myConn, myStmt);
